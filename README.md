@@ -2,7 +2,7 @@
 
 ## Introduction
 
-GoFileEncoder est un petit encodeur de fichiers qui utilise l'[encryption XOR ^(EN)^](https://en.wikipedia.org/wiki/XOR_cipher) (une autre ). Il est codé en Golang, et est compilé pour plusieurs OS (Windows&reg;, Linux&reg;,et bientôt macOS&reg;).
+GoFileEncoder est un petit encodeur de fichiers qui utilise l'[encryption XOR <sup>(EN)</sup>](https://en.wikipedia.org/wiki/XOR_cipher) (une autre ). Il est codé en Golang, et est compilé pour plusieurs OS (Windows&reg;, Linux&reg;,et bientôt macOS&reg;).
 
 Je ne suis pas un pro en Go, donc si vous trouvez un bug, ou simplement voulez faire une suggestion, je suis totalement ouvert aux [_issues_](https://github.com/eliotttak/GoFileEncoder/issues), [_pull requests_](https://github.com/eliotttak/GoFileEncoder/pulls) et à la [discussion](https://github.com/eliotttak/GoFileEncoder/discussions).
 
@@ -88,7 +88,7 @@ Si vous voulez encoder un fichier, entrez <kbd>e</kbd>, sinon, entrez <kbd>d</kb
 ### 2. Sélectionnez un fichier
 
 Ensuite, il va vous demander d'appuyez sur <kbd>Entrée</kbd> pour sélectionner un fichier. Faites-le, et un popup va apparaître. Sélectionnez votre fichier, puis validez.
-> &#x1F6C8; Si vous annulez, le popup va réapparaître 2 fois, puis à la 3^ème^, le message `"Trop de tentatives échouées"` va s'afficher puis le programme va se fermer.
+> &#x1F6C8; Si vous annulez, le popup va réapparaître 2 fois, puis à la 3<sup>ème</sup>, le message `"Trop de tentatives échouées"` va s'afficher puis le programme va se fermer.
 
 ### 3. Entrez le mot de passe
 
@@ -100,7 +100,7 @@ Après cela, un mot de passe vous sera demandé. Entrez-le puis validez avec <kb
 ### 4. Choisissez le fichier de destination
 
 Ensuite, le programme va vous demander d'appuyez sur <kbd>Entrée</kbd> pour choisir le fichier de destination. Faites-le, et un popup va apparaître. Sélectionnez le fichier à créer, puis validez.
-> &#x1F6C8; Si vous annulez, le popup va réapparaître 2 fois, puis à la 3^ème^, le message `"Trop de tentatives échouées"` va s'afficher puis le programme va se fermer.
+> &#x1F6C8; Si vous annulez, le popup va réapparaître 2 fois, puis à la 3<sup>ème</sup>, le message `"Trop de tentatives échouées"` va s'afficher puis le programme va se fermer.
 
 ### 5. Attendez...
 
