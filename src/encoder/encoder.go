@@ -3,19 +3,39 @@ package encoder
 import (
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"path/filepath"
+	"syscall"
 	"time"
 
 	"github.com/sqweek/dialog"
+	"golang.org/x/term"
 )
 
 func formatDuration(duration time.Duration) string {
-	var hours int = int(duration.Hours())
-	var minutes int = int(duration.Minutes()) % 60
-	var seconds int = int(duration.Seconds()) % 60
-	var milliseconds int = int(duration.Milliseconds()) % 1000
+	hours := int(duration.Hours())
+	minutes := int(duration.Minutes()) % 60
+	seconds := int(duration.Seconds()) % 60
+	milliseconds := int(duration.Milliseconds()) % 1000
 	return fmt.Sprintf("%d heure(s), %02d minute(s) et %02d.%03d seconde(s)", hours, minutes, seconds, milliseconds)
+}
+
+func try(f func() error, attempts int) {
+	for {
+		err := f()
+
+		if err == nil {
+			return
+		} else {
+			fmt.Println("Tentative échouée : " + err.Error())
+			attempts--
+		}
+
+		if attempts == 0 {
+			log.Fatal("Trop de tentatives échouées")
+		}
+	}
 }
 
 func Encoder() {
@@ -23,104 +43,53 @@ func Encoder() {
 	fmt.Scanln()
 	var originalFilePath string
 	var err error
-	var attempts int = 0
-	for {
+
+	try(func() error {
 		originalFilePath, err = dialog.File().Title("Sélectionner un fichier").Load()
-
-		if err == nil {
-			break
-		} else {
-			fmt.Println("Tentative échouée : " + err.Error())
-			attempts++
-		}
-
-		if attempts == 3 {
-			fmt.Println("Trop de tentatives échouées")
-			return
-		}
-	}
+		return err
+	}, 3)
 
 	fmt.Printf("Vous avez sélectionné ce fichier : %s.\n\n", originalFilePath)
 
-	var pwdStr string
-
 	fmt.Print("Entrez le mot de passe : ")
-	fmt.Scanf("%s\n", &pwdStr)
-
-	var pwd []byte = []byte(pwdStr)
+	pwd, _ := term.ReadPassword(int(syscall.Stdin))
 
 	var pwdLen int = len(pwd)
 
 	fmt.Println("Appuyez sur [Entrée] pour sauvegarder le fichier...")
 	fmt.Scanln()
 	var cryptedFilePath string
-	for {
+
+	try(func() error {
 		cryptedFilePath, err = dialog.File().
 			Title("Sauvegardez un fichier").
 			Filter("Fichiers binaires encodés (.enc.bin)", "enc.bin").
 			Filter("Tous les fichiers", "*").
 			SetStartFile(filepath.Base(originalFilePath + ".enc.bin")).
 			Save()
-
-		if err == nil {
-			break
-		} else {
-			fmt.Println("Tentative échouée : " + err.Error())
-			attempts++
-		}
-
-		if attempts == 3 {
-			fmt.Println("Trop de tentatives échouées")
-			return
-		}
-	}
+		return err
+	}, 3)
 
 	fmt.Printf("Vous avez sélectionné ce fichier : %s.\n\n", cryptedFilePath)
 
-	const blockSize int = 1024 * 16
+	const chunkSize int64 = 1024 * 16
 
 	var (
-		blockStart        int64 = 0
+		chunkStart        int64 = 0
 		originalFile      *os.File
-		originalFileBlock []byte = make([]byte, blockSize)
+		originalFileChunk []byte = make([]byte, chunkSize)
 		cryptedFile       *os.File
 	)
 
-	attempts = 0
-	for {
+	try(func() error {
 		originalFile, err = os.Open(originalFilePath)
+		return err
+	}, 3)
 
-		if err == nil {
-			defer originalFile.Close()
-			break
-		} else {
-			fmt.Println("Tentative échouée : " + err.Error())
-			attempts++
-		}
-
-		if attempts == 3 {
-			fmt.Println("Trop de tentatives échouées")
-			return
-		}
-	}
-
-	attempts = 0
-	for {
+	try(func() error {
 		cryptedFile, err = os.Create(cryptedFilePath)
-
-		if err == nil {
-			defer cryptedFile.Close()
-			break
-		} else {
-			fmt.Println("Tentative échouée : " + err.Error())
-			attempts++
-		}
-
-		if attempts == 3 {
-			fmt.Println("Trop de tentatives échouées")
-			return
-		}
-	}
+		return err
+	}, 3)
 
 	var (
 		timeBefore  time.Time
@@ -129,46 +98,33 @@ func Encoder() {
 	)
 
 	for {
-		attempts = 0
-		for {
-			_, err = originalFile.Seek(blockStart, io.SeekStart)
-			if err == nil {
-				break
-			} else {
-				fmt.Println("Tentative échouée : " + err.Error())
-				attempts++
-			}
 
-			if attempts == 3 {
-				fmt.Println("Trop de tentatives échouées")
-				return
-			}
-		}
+		try(func() error {
+			_, err = originalFile.Seek(chunkStart, io.SeekStart)
+			return err
+		}, 3)
 
-		attempts = 0
-		for {
-			_, err = originalFile.Read(originalFileBlock)
-			if err == nil {
-				break
-			} else if err == io.EOF {
+		isFinished := false
+
+		try(func() error {
+			_, err = originalFile.Read(originalFileChunk)
+
+			if err == io.EOF {
+				isFinished = true
 				timeAfter = time.Now()
 
 				timeBetween = timeAfter.Sub(timeBefore)
 				fmt.Printf("Fichier encodé en %s.\n", formatDuration(timeBetween))
-				return
-			} else {
-				fmt.Println("Tentative échouée : " + err.Error())
-				attempts++
+				return nil
 			}
+			return err
+		}, 3)
 
-			if attempts == 3 {
-				fmt.Println("Trop de tentatives échouées")
-				return
-			}
-
+		if isFinished {
+			return
 		}
 
-		var cryptedFileBlock []byte = []byte{}
+		var cryptedFileChunk []byte = []byte{}
 
 		var originalByte byte
 
@@ -176,7 +132,7 @@ func Encoder() {
 
 		timeBefore = time.Now()
 
-		for _, originalByte = range originalFileBlock {
+		for _, originalByte = range originalFileChunk {
 			if pwdIndex >= pwdLen {
 				pwdIndex = 0
 			}
@@ -184,45 +140,17 @@ func Encoder() {
 			var pwdByte byte = pwd[pwdIndex]
 			var cryptedByte byte = originalByte ^ pwdByte
 
-			cryptedFileBlock = append(cryptedFileBlock, cryptedByte)
+			cryptedFileChunk = append(cryptedFileChunk, cryptedByte)
 
 			pwdIndex++
 		}
 
-		attempts = 0
-		for {
-			_, err = cryptedFile.Seek(0, io.SeekEnd)
+		try(func() error {
+			_, err := cryptedFile.Write(cryptedFileChunk)
+			return err
+		}, 3)
 
-			if err == nil {
-				break
-			} else {
-				fmt.Println("Tentative échouée : " + err.Error())
-				attempts++
-			}
-
-			if attempts == 3 {
-				fmt.Println("Trop de tentatives échouées")
-				return
-			}
-		}
-
-		attempts = 0
-		for {
-			_, err = cryptedFile.Write(cryptedFileBlock)
-
-			if err == nil {
-				break
-			} else {
-				fmt.Println("Tentative échouée : " + err.Error())
-				attempts++
-			}
-
-			if attempts == 3 {
-				fmt.Println("Trop de tentatives échouées")
-				return
-			}
-		}
-		blockStart += 16 * 1024
+		chunkStart += chunkSize
 
 	}
 
