@@ -74,7 +74,7 @@ GoFileEncoder (ce projet)
 ```
 
 Se réferer au fichier [go.mod](./go.mod) pour plus de détails.
-> &#x1F6C8; Dans [go.mod](./go.mod), il y a une directive d'import pour [github.com/abdfnx/gosh](https://github.com/abdfnx/gosh). Il a été utilisé seulement pour mon installateur, et vous ne devriez pas en avoir besoin. Il devrait disparaître si vous exécutez `go mod tidy`.
+> &#x1F6C8; Dans [go.mod](./go.mod), il peut y avoir une directive d'import pour [github.com/abdfnx/gosh](https://github.com/abdfnx/gosh). Il a été utilisé seulement pour mon installateur, et vous ne devriez pas en avoir besoin. Il devrait disparaître si vous exécutez `go mod tidy`.
 
 ### Installation des dépendances
 ```bash
@@ -273,4 +273,5 @@ Au bout de quelques secondes, le fichier est encodé ou décodé. Le programme s
 
 ## License
 Ce logiciel est distribué sous la license GNU GENERAL PUBLIC LICENSE version 3 (GNU GPL v3).
+
 [Voir la license <sup>(EN)</sup>](LICENSE))
