@@ -1,110 +1,126 @@
 # GoFileEncoder
 
+> &#x1F1EB;&#x1F1F7; Vous êtes français ? Ouvrez [LISEZMOI.md](LISEZMOI.md) en français
+
 ## Introduction
 
-GoFileEncoder est un petit encodeur de fichiers qui utilise l'[encryption XOR <sup>(EN)</sup>](https://en.wikipedia.org/wiki/XOR_cipher) (une autre ). Il est codé en Golang, et est compilé pour plusieurs OS (Windows&reg;, Linux&reg;,et bientôt macOS&reg;).
+GoFileEncoder is a little file encoder that uses the [XOR encryption](https://en.wikipedia.org/wiki/XOR_cipher). It is coded in Golang, and is compiled for several OSs (Windows&reg;, Linux&reg;, and soon macOS&reg;).
 
-Je ne suis pas un pro en Go, donc si vous trouvez un bug, ou simplement voulez faire une suggestion, je suis totalement ouvert aux [_issues_](https://github.com/eliotttak/GoFileEncoder/issues), [_pull requests_](https://github.com/eliotttak/GoFileEncoder/pulls) et à la [discussion](https://github.com/eliotttak/GoFileEncoder/discussions).
+I am not a pro in Go, so if you find a bug, or simply want to make a suggestion, I am totally open to [_issues_](https://github.com/eliotttak/GoFileEncoder/issues), [_pull requests_](https://github.com/eliotttak/GoFileEncoder/pulls) and to the [discussion](https://github.com/eliotttak/GoFileEncoder/discussions).
 
 ---
 
-## Sommaire
+## Summary
 - [GoFileEncoder](#gofileencoder)
   - [Introduction](#introduction)
-  - [Sommaire](#sommaire)
-  - [Construction](#construction)
-    - [Clonage](#clonage)
-    - [Arbre des dépendances](#arbre-des-dépendances)
-    - [Installation des dépendances](#installation-des-dépendances)
-    - [Compilation](#compilation)
-      - [En Bash](#en-bash)
-      - [En Batch](#en-batch)
-  - [Utilisation](#utilisation)
-    - [1. Encoder ou décoder ?](#1-encoder-ou-décoder-)
-    - [2. Sélectionnez un fichier](#2-sélectionnez-un-fichier)
-    - [3. Entrez le mot de passe](#3-entrez-le-mot-de-passe)
-    - [4. Choisissez le fichier de destination](#4-choisissez-le-fichier-de-destination)
-    - [5. Attendez...](#5-attendez)
-    - [6. Terminé !](#6-terminé-)
+  - [Summary](#summary)
+  - [Building](#building)
+    - [Cloning](#cloning)
+    - [Dependencies tree](#dependencies-tree)
+    - [Dependencies installing](#dependencies-installing)
+    - [Creating assets package](#creating-assets-package)
+    - [Compiling](#compiling)
+      - [In Bash](#in-bash)
+      - [In Batch](#in-batch)
+  - [Usage](#usage)
+    - [1. Encode or decode?](#1-encode-or-decode)
+    - [2. Select a file](#2-select-a-file)
+    - [3. Enter the password](#3-enter-the-password)
+    - [4. Choose the destination file](#4-choose-the-destination-file)
+    - [5. Wait...](#5-wait)
+    - [6. All's done!](#6-alls-done)
+  - [License](#license)
 
 
-## Construction
+## Building
 
-### Clonage
+### Cloning
 
 ```bash
 git clone https://github.com/eliotttak/GoFileEncoder
 cd GoFileEncoder
 ```
 
-### Arbre des dépendances
+### Dependencies tree
 
 ```plaintext
-GoFileEncoder (ce projet)
+github.com/eliotttak/GoFileEncoder (this project)
 |
-+-- github.com/sqweek/dialog (pour les popups des fichiers)
++-- github.com/sqweek/dialog (for the file popups)
 |   |
 |    \_ github.com/TheTitanrain/w32 (indirect)
 |
- \_ golang.org/x/term (pour la demande de mot de passe)
+ \_ golang.org/x/term (for the password asking)
     |
      \_ golang.org/x/sys (indirect)
 ```
 
-Se réferer au fichier [go.mod](./go.mod) pour plus de détails.
+Refer to the file [go.mod](./go.mod) for more details.
+> &#x1F6C8; In [go.mod](./go.mod), there is an import for [github.com/abdfnx/gosh](https://github.com/abdfnx/gosh). It was used only for my setup, and you shouldn't need it. It will disappear if you run `go mod tidy`.
 
-### Installation des dépendances
+### Dependencies installing
 ```bash
 go mod tidy
+go get
 ```
 
-### Compilation
+### Creating assets package
+```bash
+go-bindata -pkg assets -o assets/bindata.go LICENSE
+```
 
-#### En Bash
+### Compiling
+
+#### In Bash
 ```bash
 go build -o ./bin/GoFileEncoder ./src/
 ```
 
-#### En Batch
+#### In Batch
 ```batch
 go build -o .\bin\GoFileEncoder .\src\
 ```
 
 ---
 
-## Utilisation
+## Usage
 
-### 1. Encoder ou décoder ?
+### 1. Encode or decode?
 
-En premier, lancez le programme. Celui-ci va vous demander si vous souhaitez encoder ou décoder un fichier :
+At first, run the program. It will ask you if you want to decode or encode a file :
 ```plaintext
 Que voulez-vous faire ?
  - Encoder un fichier (e)
  - Décoder un fichier (d)
 (e/d)>>>
 ```
-Si vous voulez encoder un fichier, entrez <kbd>e</kbd>, sinon, entrez <kbd>d</kbd>. Dans tous les cas, validez avec <kbd>Entrée</kbd>.
 
-### 2. Sélectionnez un fichier
+If you want to encode a file, enter <kbd>e</kbd>, else, enter <kbd>d</kbd>. In all the cases, confirm with <kbd>Enter</kbd>.
 
-Ensuite, il va vous demander d'appuyez sur <kbd>Entrée</kbd> pour sélectionner un fichier. Faites-le, et un popup va apparaître. Sélectionnez votre fichier, puis validez.
-> &#x1F6C8; Si vous annulez, le popup va réapparaître 2 fois, puis à la 3<sup>ème</sup>, le message `"Trop de tentatives échouées"` va s'afficher puis le programme va se fermer.
+### 2. Select a file
 
-### 3. Entrez le mot de passe
+Then, it will ask you to press <kbd>Enter</kbd> to select a file. Do it, and a popup will aappear. Select your file, then confirm.
+> &#x1F6C8; If you cancel, the popup will appear back twice, then at the 3<sup>rd</sup>, the message `"Trop de tentatives échouées"` (`Too many failed attempts`) will be displayed and the program will be closed.
 
-Après cela, un mot de passe vous sera demandé. Entrez-le puis validez avec <kbd>Entrée</kbd>.
-> &#x26A0; Si vous avez choisi `Décoder un fichier`, faîtes attention à bien écrire le mot de passe. Si vous vous trompez ne serait-ce que d'un caractère, le fichier sera corrompu et ne sera plus utilisable.
+### 3. Enter the password
 
-> &#x1F6C8; Pour garantir la confidentialité de votre mot de passe, celui-ci ne s'affichera pas sur votre écran.
+After it, you will be asked for a password. Enter it then confirm by pressing <kbd>Enter</kbd>.
+> &#x26A0; If you choosed `Decode a file`, be careful to write the password correctly. If you misspell it by even one character, the file will be corrupted and no longer usable.
 
-### 4. Choisissez le fichier de destination
+> &#x1F6C8; To ensure that your password remains confidential, it will not be displayed on your screen.
 
-Ensuite, le programme va vous demander d'appuyez sur <kbd>Entrée</kbd> pour choisir le fichier de destination. Faites-le, et un popup va apparaître. Sélectionnez le fichier à créer, puis validez.
-> &#x1F6C8; Si vous annulez, le popup va réapparaître 2 fois, puis à la 3<sup>ème</sup>, le message `"Trop de tentatives échouées"` va s'afficher puis le programme va se fermer.
+### 4. Choose the destination file
 
-### 5. Attendez...
+Then, the program will ask you to press <kbd>Entrée</kbd> to choose the destination file. Do it, and a popup will aappear. Select the file to create, then confirm.
+> &#x1F6C8; If you cancel, the popup will appear back twice, then at the 3<sup>rd</sup>, the message `"Trop de tentatives échouées"` (`Too many failed attempts`) will be displayed and the program will be closed.
 
-Le fichier est en train d'être encodé. Ne fermez pas le programme.
+### 5. Wait...
 
-### 6. Terminé !
-Au bout de quelques secondes, le fichier est encodé ou décodé. Le programme se ferme automatiquement.
+The file is being encoded. Do not close the program.
+
+### 6. All's done!
+After a few seconds, the file is encoded or decoded. The programme closes automatically.
+
+## License
+This software is distributed under the GNU GENERAL PUBLIC LICENSE version 3 (GNU GPL v3).
+[See the license](LICENSE)

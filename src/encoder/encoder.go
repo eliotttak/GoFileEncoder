@@ -3,48 +3,56 @@ package encoder
 import (
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"path/filepath"
 	"syscall"
 	"time"
 
+	"github.com/eliotttak/GoFileEncoder/src/communFunctions"
+
 	"github.com/sqweek/dialog"
 	"golang.org/x/term"
 )
 
-func formatDuration(duration time.Duration) string {
-	hours := int(duration.Hours())
-	minutes := int(duration.Minutes()) % 60
-	seconds := int(duration.Seconds()) % 60
-	milliseconds := int(duration.Milliseconds()) % 1000
-	return fmt.Sprintf("%d heure(s), %02d minute(s) et %02d.%03d seconde(s)", hours, minutes, seconds, milliseconds)
+func encodeByte(originalByte byte, pwdByte byte, cryptedByte *byte) {
+	*cryptedByte = originalByte ^ pwdByte
 }
 
-func try(f func() error, attempts int) {
-	for {
-		err := f()
+func encodeChunk(originalChunk []byte, pwd []byte, pwdIndex *int, cryptedFile *os.File) {
 
-		if err == nil {
-			return
-		} else {
-			fmt.Println("Tentative échouée : " + err.Error())
-			attempts--
+	var (
+		pwdLen           int    = len(pwd)
+		cryptedFileBlock []byte = []byte{}
+	)
+
+	for _, originalByte := range originalChunk {
+		if *pwdIndex >= pwdLen {
+			*pwdIndex = 0
 		}
 
-		if attempts == 0 {
-			log.Fatal("Trop de tentatives échouées")
-		}
+		var pwdByte byte = pwd[*pwdIndex]
+		var cryptedByte byte
+
+		encodeByte(originalByte, pwdByte, &cryptedByte)
+
+		cryptedFileBlock = append(cryptedFileBlock, cryptedByte)
+
+		(*pwdIndex)++
 	}
+
+	communFunctions.Try(func() error {
+		_, err := cryptedFile.Write(cryptedFileBlock)
+		return err
+	}, 3)
 }
 
 func Encoder() {
 	fmt.Println("Appuyez sur [Entrée] pour sélectionner un fichier...")
 	fmt.Scanln()
 	var originalFilePath string
-	var err error
 
-	try(func() error {
+	communFunctions.Try(func() error {
+		var err error
 		originalFilePath, err = dialog.File().Title("Sélectionner un fichier").Load()
 		return err
 	}, 3)
@@ -54,13 +62,14 @@ func Encoder() {
 	fmt.Print("Entrez le mot de passe : ")
 	pwd, _ := term.ReadPassword(int(syscall.Stdin))
 
-	var pwdLen int = len(pwd)
+	fmt.Println()
 
 	fmt.Println("Appuyez sur [Entrée] pour sauvegarder le fichier...")
 	fmt.Scanln()
 	var cryptedFilePath string
 
-	try(func() error {
+	communFunctions.Try(func() error {
+		var err error
 		cryptedFilePath, err = dialog.File().
 			Title("Sauvegardez un fichier").
 			Filter("Fichiers binaires encodés (.enc.bin)", "enc.bin").
@@ -81,12 +90,14 @@ func Encoder() {
 		cryptedFile       *os.File
 	)
 
-	try(func() error {
+	communFunctions.Try(func() error {
+		var err error
 		originalFile, err = os.Open(originalFilePath)
 		return err
 	}, 3)
 
-	try(func() error {
+	communFunctions.Try(func() error {
+		var err error
 		cryptedFile, err = os.Create(cryptedFilePath)
 		return err
 	}, 3)
@@ -97,61 +108,42 @@ func Encoder() {
 		timeBetween time.Duration
 	)
 
+	timeBefore = time.Now()
+
+	var pwdIndex int = 0
+
 	for {
-
-		try(func() error {
-			_, err = originalFile.Seek(chunkStart, io.SeekStart)
-			return err
-		}, 3)
-
 		isFinished := false
 
-		try(func() error {
-			_, err = originalFile.Read(originalFileChunk)
+		communFunctions.Try(func() error {
+			readBytesNumber, err := originalFile.Read(originalFileChunk)
 
-			if err == io.EOF {
+			if err == io.EOF && readBytesNumber == 0 {
 				isFinished = true
 				timeAfter = time.Now()
 
 				timeBetween = timeAfter.Sub(timeBefore)
-				fmt.Printf("Fichier encodé en %s.\n", formatDuration(timeBetween))
+				fmt.Printf("Fichier encodé en %s.\n", communFunctions.FormatDuration(timeBetween))
 				return nil
 			}
 			return err
 		}, 3)
 
 		if isFinished {
-			return
+			break
 		}
 
-		var cryptedFileChunk []byte = []byte{}
-
-		var originalByte byte
-
-		var pwdIndex int = 0
-
-		timeBefore = time.Now()
-
-		for _, originalByte = range originalFileChunk {
-			if pwdIndex >= pwdLen {
-				pwdIndex = 0
-			}
-
-			var pwdByte byte = pwd[pwdIndex]
-			var cryptedByte byte = originalByte ^ pwdByte
-
-			cryptedFileChunk = append(cryptedFileChunk, cryptedByte)
-
-			pwdIndex++
-		}
-
-		try(func() error {
-			_, err := cryptedFile.Write(cryptedFileChunk)
-			return err
-		}, 3)
+		encodeChunk(originalFileChunk, pwd, &pwdIndex, cryptedFile)
 
 		chunkStart += chunkSize
-
 	}
 
+	var originalFileStats os.FileInfo
+	communFunctions.Try(func() error {
+		var err error
+		originalFileStats, err = originalFile.Stat()
+		return err
+	}, 3)
+
+	cryptedFile.Truncate(originalFileStats.Size())
 }
