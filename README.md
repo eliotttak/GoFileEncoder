@@ -6,7 +6,7 @@
 
 GoFileEncoder is a little file encoder that uses the [XOR encryption](https://en.wikipedia.org/wiki/XOR_cipher). It is coded in Golang, and is compiled for several OSs (Windows&reg;, Linux&reg;, and soon macOS&reg;).
 
-I am not a pro in Go, so if you find a bug, or simply want to make a suggestion, I am totally open to [_issues_](https://github.com/eliotttak/GoFileEncoder/issues), [_pull requests_](https://github.com/eliotttak/GoFileEncoder/pulls) and to the [discussion](https://github.com/eliotttak/GoFileEncoder/discussions).
+I am not a pro in Go, so if you find a bug, or simply want to make a suggestion, I am totally open to [issues](https://github.com/eliotttak/GoFileEncoder/issues), [pull requests_](https://github.com/eliotttak/GoFileEncoder/pulls) and to the [discussion](https://github.com/eliotttak/GoFileEncoder/discussions).
 
 ---
 
@@ -56,7 +56,7 @@ github.com/eliotttak/GoFileEncoder (this project)
 ```
 
 Refer to the file [go.mod](./go.mod) for more details.
-> &#x1F6C8; In [go.mod](./go.mod), there is an import for [github.com/abdfnx/gosh](https://github.com/abdfnx/gosh). It was used only for my setup, and you shouldn't need it. It will disappear if you run `go mod tidy`.
+> &#x1F6C8; In [go.mod](./go.mod), there can be an import for [github.com/abdfnx/gosh](https://github.com/abdfnx/gosh). It was used only for my setup, and you shouldn't need it. It will disappear if you run `go mod tidy`.
 
 ### Dependencies installing
 ```bash
@@ -123,4 +123,5 @@ After a few seconds, the file is encoded or decoded. The programme closes automa
 
 ## License
 This software is distributed under the GNU GENERAL PUBLIC LICENSE version 3 (GNU GPL v3).
+
 [See the license](LICENSE)
