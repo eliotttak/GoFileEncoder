@@ -8,7 +8,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/eliotttak/GoFileEncoder/src/communFunctions"
+	"github.com/eliotttak/GoFileEncoder/pkg/communFunctions"
 
 	"github.com/sqweek/dialog"
 	"golang.org/x/term"

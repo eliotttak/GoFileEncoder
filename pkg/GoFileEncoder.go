@@ -1,3 +1,5 @@
+// src/GoFileEncoder.go
+
 package main
 
 import (
@@ -7,9 +9,9 @@ import (
 	"time"
 
 	"github.com/eliotttak/GoFileEncoder/assets"
-	"github.com/eliotttak/GoFileEncoder/src/communFunctions"
-	"github.com/eliotttak/GoFileEncoder/src/decoder"
-	"github.com/eliotttak/GoFileEncoder/src/encoder"
+	"github.com/eliotttak/GoFileEncoder/pkg/communFunctions"
+	"github.com/eliotttak/GoFileEncoder/pkg/decoder"
+	"github.com/eliotttak/GoFileEncoder/pkg/encoder"
 )
 
 var license string
