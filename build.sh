@@ -1,13 +1,15 @@
+#!/bin/bash
+
 GOOS=$1
 GOARCH=$2
 EXT=
 
 if [ "$GOOS" == "" ]; then
-    GOOS=`go env GOOS`
+    GOOS=$(go env GOOS)
 fi
 
 if [ "$GOARCH" == "" ]; then
-    GOARCH=`go env GOARCH`
+    GOARCH=$(go env GOARCH)
 fi
 
 if [ "$GOOS" == "windows" ]; then
