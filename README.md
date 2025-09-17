@@ -1,6 +1,6 @@
 # GoFileEncoder
 
-> &#x1F1EB;&#x1F1F7; Vous êtes français ? Ouvrez [LISEZMOI.md](LISEZMOI.md) en français
+> &#x1F1EB;&#x1F1F7; Vous parlez français ? Ouvrez [LISEZMOI.md](LISEZMOI.md) en français
 
 ## Introduction
 
@@ -16,10 +16,10 @@ I am not a pro in Go, so if you find a bug, or simply want to make a suggestion,
   - [Summary](#summary)
   - [Building](#building)
     - [Cloning](#cloning)
-    - [Dependencies tree](#dependencies-tree)
+    - [Package dependencies tree](#package-dependencies-tree)
+    - [Building dependencies](#building-dependencies)
     - [Dependencies installing](#dependencies-installing)
-    - [Creating assets package](#creating-assets-package)
-    - [Compiling](#compiling)
+    - [Compiling and creating assets package](#compiling-and-creating-assets-package)
       - [In Bash](#in-bash)
       - [In Batch](#in-batch)
   - [Usage](#usage)
@@ -41,7 +41,7 @@ git clone https://github.com/eliotttak/GoFileEncoder
 cd GoFileEncoder
 ```
 
-### Dependencies tree
+###  Package dependencies tree
 
 ```plaintext
 github.com/eliotttak/GoFileEncoder (this project)
@@ -50,35 +50,38 @@ github.com/eliotttak/GoFileEncoder (this project)
 |   |
 |    \_ github.com/TheTitanrain/w32 (indirect)
 |
- \_ golang.org/x/term (for the password asking)
-    |
-     \_ golang.org/x/sys (indirect)
++-- golang.org/x/term (for the password asking)
+|   |
+|    \_ golang.org/x/sys (indirect)
+|
+ \_ github.com/christianhujer/isheadless (to verify if there is a GUI)
 ```
 
 Refer to the file [go.mod](./go.mod) for more details.
 > &#x1F6C8; In [go.mod](./go.mod), there can be an import for [github.com/abdfnx/gosh](https://github.com/abdfnx/gosh). It was used only for my setup, and you shouldn't need it. It will disappear if you run `go mod tidy`.
 
+### Building dependencies
+- `github.com/go-bindata/go-bindata/go-bindata/...` (to create the assets file)
+
 ### Dependencies installing
 ```bash
 go mod tidy
+go install github.com/go-bindata/go-bindata/go-bindata/...
 go get
 ```
 
-### Creating assets package
-```bash
-go-bindata -pkg assets -o assets/bindata.go LICENSE
-```
-
-### Compiling
+### Compiling and creating assets package
 
 #### In Bash
 ```bash
-go build -o ./bin/GoFileEncoder ./src/
+# You will maybe have to run 'chmod 744 build.sh'
+./build.sh # You can add GOOS and GOARCH values, e.g. './build.sh linux amd64'
 ```
 
 #### In Batch
 ```batch
-go build -o .\bin\GoFileEncoder .\src\
+rem You can add GOOS and GOARCH values, e.g. 'build.bat windows amd64'
+build.bat
 ```
 
 ---
@@ -102,6 +105,9 @@ If you want to encode a file, enter <kbd>e</kbd>, else, enter <kbd>d</kbd>. In a
 Then, it will ask you to press <kbd>Enter</kbd> to select a file. Do it, and a popup will aappear. Select your file, then confirm.
 > &#x1F6C8; If you cancel, the popup will appear back twice, then at the 3<sup>rd</sup>, the message `"Trop de tentatives échouées"` (`Too many failed attempts`) will be displayed and the program will be closed.
 
+> &#x1F6C8; If your configuration don't include graphic interface, you will have to enter manually the absolute path to your file.
+
+
 ### 3. Enter the password
 
 After it, you will be asked for a password. Enter it then confirm by pressing <kbd>Enter</kbd>.
@@ -113,6 +119,8 @@ After it, you will be asked for a password. Enter it then confirm by pressing <k
 
 Then, the program will ask you to press <kbd>Entrée</kbd> to choose the destination file. Do it, and a popup will aappear. Select the file to create, then confirm.
 > &#x1F6C8; If you cancel, the popup will appear back twice, then at the 3<sup>rd</sup>, the message `"Trop de tentatives échouées"` (`Too many failed attempts`) will be displayed and the program will be closed.
+
+> &#x1F6C8; If your configuration don't include graphic interface, you will have to enter manually the absolute path to your file.
 
 ### 5. Wait...
 
