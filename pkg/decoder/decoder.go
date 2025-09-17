@@ -11,7 +11,6 @@ import (
 
 	"github.com/eliotttak/GoFileEncoder/pkg/communFunctions"
 
-	"github.com/sqweek/dialog"
 	"golang.org/x/term"
 )
 
@@ -66,12 +65,18 @@ func Decoder() {
 	var err error
 
 	communFunctions.Try(func() error {
-		cryptedFilePath, err = dialog.File().
-			Filter("Fichiers binaires encodés (.enc.bin)", "enc.bin").
-			Filter("Tous les fichiers", "*").
-			Title("Sélectionner un fichier").
-			Load()
+		cryptedFilePath, err = communFunctions.SelectFilePath(
+			"Sélectionner un fichier",
+			communFunctions.SelectFilePathFilters{
+				{"Fichiers binaires encodés (.enc.bin)", "enc.bin"},
+				{"Tous les fichiers", "*"},
+			},
+			"",
+			"",
+			communFunctions.Load,
+		)
 		return err
+
 	}, 3)
 
 	fmt.Printf("Vous avez sélectionné ce fichier : %s.\n\n", cryptedFilePath)
@@ -96,10 +101,13 @@ func Decoder() {
 	var originalFilePath string
 
 	communFunctions.Try(func() error {
-		originalFilePath, err = dialog.File().
-			Title("Sauvegardez un fichier").
-			SetStartFile(filepath.Base(originalFileProposition)).
-			Save()
+		originalFilePath, err = communFunctions.SelectFilePath(
+			"Sauvegardez un fichier",
+			communFunctions.SelectFilePathFilters{},
+			filepath.Base(originalFileProposition),
+			"",
+			communFunctions.Save,
+		)
 		return err
 	}, 3)
 
@@ -142,7 +150,7 @@ func Decoder() {
 				timeAfter = time.Now()
 
 				timeBetween = timeAfter.Sub(timeBefore)
-				fmt.Printf("Fichier encodé en %s.\n", communFunctions.FormatDuration(timeBetween))
+				fmt.Printf("Fichier décodé en %s.\n", communFunctions.FormatDuration(timeBetween))
 				return nil
 			}
 

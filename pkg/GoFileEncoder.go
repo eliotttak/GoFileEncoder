@@ -1,5 +1,3 @@
-// src/GoFileEncoder.go
-
 package main
 
 import (

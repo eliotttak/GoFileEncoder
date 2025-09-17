@@ -10,7 +10,6 @@ import (
 
 	"github.com/eliotttak/GoFileEncoder/pkg/communFunctions"
 
-	"github.com/sqweek/dialog"
 	"golang.org/x/term"
 )
 
@@ -53,7 +52,13 @@ func Encoder() {
 
 	communFunctions.Try(func() error {
 		var err error
-		originalFilePath, err = dialog.File().Title("Sélectionner un fichier").Load()
+		originalFilePath, err = communFunctions.SelectFilePath(
+			"Sélectionner un fichier",
+			communFunctions.SelectFilePathFilters{},
+			"",
+			"",
+			communFunctions.Load,
+		)
 		return err
 	}, 3)
 
@@ -70,12 +75,16 @@ func Encoder() {
 
 	communFunctions.Try(func() error {
 		var err error
-		cryptedFilePath, err = dialog.File().
-			Title("Sauvegardez un fichier").
-			Filter("Fichiers binaires encodés (.enc.bin)", "enc.bin").
-			Filter("Tous les fichiers", "*").
-			SetStartFile(filepath.Base(originalFilePath + ".enc.bin")).
-			Save()
+		cryptedFilePath, err = communFunctions.SelectFilePath(
+			"Sauvegardez un fichier",
+			communFunctions.SelectFilePathFilters{
+				{"Fichiers binaires encodés (.enc.bin)", "enc.bin"},
+				{"Tous les fichiers", "*"},
+			},
+			filepath.Base(originalFilePath+".enc.bin"),
+			"",
+			communFunctions.Save,
+		)
 		return err
 	}, 3)
 

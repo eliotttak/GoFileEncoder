@@ -4,6 +4,7 @@ go 1.24.6
 
 require (
 	github.com/abdfnx/gosh v0.4.0
+	github.com/christianhujer/isheadless v0.0.0-20181114123347-cbcc774d58b8
 	github.com/sqweek/dialog v0.0.0-20240226140203-065105509627
 	golang.org/x/term v0.35.0
 )
