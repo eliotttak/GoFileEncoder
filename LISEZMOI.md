@@ -4,7 +4,7 @@
 
 ## Introduction
 
-GoFileEncoder est un petit encodeur de fichiers qui utilise l'[encryption XOR <sup>(EN)</sup>](https://en.wikipedia.org/wiki/XOR_cipher) (une autre ). Il est codé en Golang, et est compilé pour plusieurs OS (Windows&reg;, Linux&reg;,et bientôt macOS&reg;).
+GoFileEncoder est un petit encodeur de fichiers qui utilise l'[encryption XOR <sup>(EN)</sup>](https://en.wikipedia.org/wiki/XOR_cipher). Il est codé en Golang, et est compilé pour plusieurs OS (Windows&reg;, Linux&reg;,et bientôt macOS&reg;).
 
 Je ne suis pas un pro en Go, donc si vous trouvez un bug, ou simplement voulez faire une suggestion, je suis totalement ouvert aux [_issues_ <sup>(EN)</sup>](https://github.com/eliotttak/GoFileEncoder/issues), [_pull requests_ <sup>(EN)</sup>](https://github.com/eliotttak/GoFileEncoder/pulls) et à la [discussion <sup>(EN)</sup>](https://github.com/eliotttak/GoFileEncoder/discussions).
 
@@ -132,3 +132,4 @@ Au bout de quelques secondes, le fichier est encodé ou décodé. Le programme s
 Ce logiciel est distribué sous la license GNU GENERAL PUBLIC LICENSE version 3 (GNU GPL v3).
 
 [Voir la license <sup>(EN)</sup>](LICENSE)
+
