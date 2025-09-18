@@ -4,6 +4,14 @@ set GOOS=%1
 set GOARCH=%2
 set EXT=
 
+if "%GOOS%" == "" (
+    FOR /F "delims=" %%A IN ('go env GOOS') DO SET GOOS=%%A
+)
+
+if "%GOARCH%" == "" (
+    FOR /F "delims=" %%A IN ('go env GOARCH') DO SET GOARCH=%%A
+)
+
 if "%GOOS%" == "windows" (
     set EXT=.exe
 )

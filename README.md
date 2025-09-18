@@ -22,6 +22,9 @@ I am not a pro in Go, so if you find a bug, or simply want to make a suggestion,
     - [Compiling and creating assets package](#compiling-and-creating-assets-package)
       - [In Bash](#in-bash)
       - [In Batch](#in-batch)
+    - [Running](#running)
+      - [In Bash](#in-bash-1)
+      - [In Batch](#in-batch-1)
   - [Usage](#usage)
     - [1. Encode or decode?](#1-encode-or-decode)
     - [2. Select a file](#2-select-a-file)
@@ -87,13 +90,13 @@ build.bat
 ### Running
 #### In Bash
 ```bash
-./bin/portables/GoFileEncoder_portable_linux_amd64 # You can write other OS or architecture.
+./bin/portables/GoFileEncoder_portable_linux_amd64 # You can write another OS or architecture.
 ```
 
 #### In Batch
 ```batch
 .\bin\portables\GoFileEncoder_portable_windows_amd64.exe
-:: You can write other OS or architecture.
+rem You can write another OS or architecture.
 ```
 
 ---

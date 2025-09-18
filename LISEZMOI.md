@@ -22,6 +22,9 @@ Je ne suis pas un pro en Go, donc si vous trouvez un bug, ou simplement voulez f
     - [Compilation et création du _package_ d'assets](#compilation-et-création-du-package-dassets)
       - [En Bash](#en-bash)
       - [En Batch](#en-batch)
+    - [Exécution](#exécution)
+      - [En Bash](#en-bash-1)
+      - [En Batch](#en-batch-1)
   - [Utilisation](#utilisation)
     - [1. Encoder ou décoder ?](#1-encoder-ou-décoder-)
     - [2. Sélectionnez un fichier](#2-sélectionnez-un-fichier)
@@ -83,6 +86,18 @@ go get
 rem Vous pouvez ajouter une valeur de GOOS et une de GOARCH, par ex. 'build.bat windows amd64'
 build.bat
 ```
+
+### Exécution
+#### En Bash
+```bash
+./bin/portables/GoFileEncoder_portable_linux_amd64 # Vous pouvez écrire une autre OS ou architecture.
+```
+#### En Batch
+```batch
+.\bin\portables\GoFileEncoder_portable_windows_amd64.exe
+rem Vous pouvez écrire une autre OS ou architecture.
+```
+
 
 ---
 
