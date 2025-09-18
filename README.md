@@ -84,6 +84,18 @@ rem You can add GOOS and GOARCH values, e.g. 'build.bat windows amd64'
 build.bat
 ```
 
+### Running
+#### In Bash
+```bash
+./bin/portables/GoFileEncoder_portable_linux_amd64 # You can write other OS or architecture.
+```
+
+#### In Batch
+```batch
+.\bin\portables\GoFileEncoder_portable_windows_amd64.exe
+:: You can write other OS or architecture.
+```
+
 ---
 
 ## Usage
@@ -133,3 +145,4 @@ After a few seconds, the file is encoded or decoded. The programme closes automa
 This software is distributed under the GNU GENERAL PUBLIC LICENSE version 3 (GNU GPL v3).
 
 [See the license](LICENSE)
+
