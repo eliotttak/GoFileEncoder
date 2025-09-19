@@ -9,7 +9,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/eliotttak/GoFileEncoder/pkg/communFunctions"
+	"github.com/eliotttak/GoFileEncoder/pkg/communThings"
+	"github.com/eliotttak/GoFileEncoder/pkg/translations"
 
 	"golang.org/x/term"
 )
@@ -52,42 +53,42 @@ func decodeChunk(cryptedChunk []byte, pwd []byte, pwdIndex *int, originalFile *o
 		(*pwdIndex)++
 	}
 
-	communFunctions.Try(func() error {
+	communThings.Try(func() error {
 		_, err := originalFile.Write(originalFileBlock)
 		return err
 	}, 3)
 }
 
 func Decoder() {
-	fmt.Println("Appuyez sur [Entrée] pour sélectionner un fichier...")
+	fmt.Println(translations.GetTranslations().PressEnterToSelectFile)
 	fmt.Scanln()
 	var cryptedFilePath string
 	var err error
 
-	communFunctions.Try(func() error {
-		cryptedFilePath, err = communFunctions.SelectFilePath(
-			"Sélectionner un fichier",
-			communFunctions.SelectFilePathFilters{
-				{"Fichiers binaires encodés (.enc.bin)", "enc.bin"},
-				{"Tous les fichiers", "*"},
+	communThings.Try(func() error {
+		cryptedFilePath, err = communThings.SelectFilePath(
+			translations.GetTranslations().SelectFile,
+			communThings.SelectFilePathFilters{
+				{translations.GetTranslations().EncodedBinFiles, "enc.bin"},
+				{translations.GetTranslations().AllFiles, "*"},
 			},
 			"",
 			"",
-			communFunctions.Load,
+			communThings.Load,
 		)
 		return err
 
 	}, 3)
 
-	fmt.Printf("Vous avez sélectionné ce fichier : %s.\n\n", cryptedFilePath)
+	fmt.Printf(translations.GetTranslations().YouSelectedFile, cryptedFilePath)
 
-	fmt.Print("Entrez le mot de passe : ")
+	fmt.Print(translations.GetTranslations().EnterPassword)
 
 	pwd, _ := term.ReadPassword(int(syscall.Stdin))
 
 	fmt.Println()
 
-	fmt.Println("Appuyez sur [Entrée] pour sauvegarder le fichier...")
+	fmt.Println(translations.GetTranslations().PressEnterToSaveFile)
 	fmt.Scanln()
 
 	var originalFileProposition string
@@ -100,18 +101,18 @@ func Decoder() {
 
 	var originalFilePath string
 
-	communFunctions.Try(func() error {
-		originalFilePath, err = communFunctions.SelectFilePath(
-			"Sauvegardez un fichier",
-			communFunctions.SelectFilePathFilters{},
+	communThings.Try(func() error {
+		originalFilePath, err = communThings.SelectFilePath(
+			translations.GetTranslations().SaveFile,
+			communThings.SelectFilePathFilters{},
 			filepath.Base(originalFileProposition),
 			"",
-			communFunctions.Save,
+			communThings.Save,
 		)
 		return err
 	}, 3)
 
-	fmt.Printf("Vous avez sélectionné ce fichier : %s.\n\n", originalFilePath)
+	fmt.Printf(translations.GetTranslations().YouSelectedFile, originalFilePath)
 
 	const blockSize int = 1024 * 16
 
@@ -121,12 +122,12 @@ func Decoder() {
 		originalFile     *os.File
 	)
 
-	communFunctions.Try(func() error {
+	communThings.Try(func() error {
 		cryptedFile, err = os.Open(cryptedFilePath)
 		return err
 	}, 3)
 
-	communFunctions.Try(func() error {
+	communThings.Try(func() error {
 		originalFile, err = os.Create(originalFilePath)
 		return err
 	}, 3)
@@ -142,7 +143,7 @@ func Decoder() {
 	for {
 
 		isFinished := false
-		communFunctions.Try(func() error {
+		communThings.Try(func() error {
 			readBytesNumber, err := cryptedFile.Read(cryptedFileBlock)
 
 			if err == io.EOF && readBytesNumber == 0 {
@@ -150,7 +151,7 @@ func Decoder() {
 				timeAfter = time.Now()
 
 				timeBetween = timeAfter.Sub(timeBefore)
-				fmt.Printf("Fichier décodé en %s.\n", communFunctions.FormatDuration(timeBetween))
+				fmt.Printf(translations.GetTranslations().FileDecodedIn, communThings.FormatDuration(timeBetween))
 				return nil
 			}
 
@@ -166,7 +167,7 @@ func Decoder() {
 	}
 
 	var cryptedFileStats os.FileInfo
-	communFunctions.Try(func() error {
+	communThings.Try(func() error {
 		var err error
 		cryptedFileStats, err = cryptedFile.Stat()
 		return err

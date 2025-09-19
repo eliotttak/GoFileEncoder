@@ -1,8 +1,17 @@
 @echo off
 
+setlocal enabledelayedexpansion
+
 set GOOS=%1
 set GOARCH=%2
 set EXT=
+set BUILDOPTIONS=
+
+set count=0
+for %%a in (%*) do (
+    set /a count+=1
+    if !count! GEQ 3 set BUILDOPTIONS="!BUILDOPTIONS! %%A"
+)
 
 if "%GOOS%" == "" (
     FOR /F "delims=" %%A IN ('go env GOOS') DO SET GOOS=%%A
@@ -24,4 +33,4 @@ rsrc -arch=%GOARCH% -ico icons\icon_16.ico,icons\icon_32.ico,icons\icon_64.ico,i
 
 go-bindata -pkg assets -o assets/bindata.go LICENSE
 
-go build -o .\bin\portables\GoFileEncoder_portable_%GOOS%_%GOARCH%%EXT% .\pkg\
+go build -o .\bin\portables\GoFileEncoder_portable_%GOOS%_%GOARCH%%EXT% %BUILDOPTIONS% .\pkg\
