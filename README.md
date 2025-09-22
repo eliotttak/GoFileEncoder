@@ -114,7 +114,7 @@ rem You can write another OS or architecture.
 ### Install a language
 Download a translation file (e.g. [`translate-en-GB.json`](/translationFiles/translate-en-GB.json)) and place it in the same folder as the executable.
 
-### Define th language to use
+### Define the language to use
 The choice of the language to use is partly automated. Here are the details:
 #### 1. No translation file installed
 In this configuration, the language used will be British English (`en-GB`).
