@@ -130,7 +130,7 @@ The file name must be in the format `translate-ab-CD.json`, e.g. `translate-en-G
 #### File content
 The file is in the `JSON` format.
 
-The file is composed of four main parts:
+The file is composed of five main parts:
 - `general` contains the translations that will be used by at least 2 differents packages.
 - `Intro` contains the translations used only by the package `main`.
 - `CommonThings` contains the translations used only by the package `commonThings`.
