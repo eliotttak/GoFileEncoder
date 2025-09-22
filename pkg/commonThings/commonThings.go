@@ -1,4 +1,4 @@
-package communThings
+package commonThings
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/christianhujer/isheadless"
-	"github.com/eliotttak/GoFileEncoder/pkg/translations"
+	"github.com/eliotttak/GoFileEncoder/pkg/translate"
 	"github.com/sqweek/dialog"
 )
 
@@ -28,8 +28,10 @@ func SelectFilePath(
 	actionType string,
 ) (string, error) {
 
+	translations := translate.GetTranslations()
+
 	if isheadless.IsHeadless() {
-		fmt.Print(translations.GetTranslations().NoGUI)
+		fmt.Print(translations.CommonThings.NoGUI)
 		var path string
 		fmt.Scanln(&path)
 		return path, nil
@@ -72,30 +74,34 @@ func tern[T any](cond bool, ifTrue T, ifFalse T) T {
 }
 
 func Try(f func() error, attempts int) {
+	translations := translate.GetTranslations()
+
 	for {
 		err := f()
 
 		if err == nil {
 			return
 		} else {
-			fmt.Printf(translations.GetTranslations().EchoedAttempt, err.Error())
+			fmt.Printf(translations.CommonThings.EchoedAttempt, err.Error())
 			attempts--
 		}
 
 		if attempts == 0 {
-			log.Fatal(translations.GetTranslations().ToManyEchoedAttempts)
+			log.Fatal(translations.CommonThings.ToManyEchoedAttempts)
 		}
 	}
 }
 
 func FormatDuration(duration time.Duration) string {
+	translations := translate.GetTranslations()
+
 	hours := int(duration.Hours())
 	minutes := int(duration.Minutes()) % 60
 	seconds := int(duration.Seconds()) % 60
 	microseconds := int(duration.Microseconds()) % 1000000
 	return fmt.Sprintf(
-		translations.GetTranslations().Time,
-		hours, tern(hours >= 2, translations.GetTranslations().Hours, translations.GetTranslations().Hour),
-		minutes, tern(minutes >= 2, translations.GetTranslations().Minutes, translations.GetTranslations().Minute),
-		seconds, microseconds, tern(seconds >= 2, translations.GetTranslations().Seconds, translations.GetTranslations().Second))
+		translations.CommonThings.Time,
+		hours, tern(hours >= 2, translations.CommonThings.Hours, translations.CommonThings.Hour),
+		minutes, tern(minutes >= 2, translations.CommonThings.Minutes, translations.CommonThings.Minute),
+		seconds, microseconds, tern(seconds >= 2, translations.CommonThings.Seconds, translations.CommonThings.Second))
 }

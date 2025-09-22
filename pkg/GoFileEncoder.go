@@ -7,10 +7,10 @@ import (
 	"time"
 
 	"github.com/eliotttak/GoFileEncoder/assets"
-	"github.com/eliotttak/GoFileEncoder/pkg/communThings"
+	"github.com/eliotttak/GoFileEncoder/pkg/commonThings"
 	"github.com/eliotttak/GoFileEncoder/pkg/decoder"
 	"github.com/eliotttak/GoFileEncoder/pkg/encoder"
-	"github.com/eliotttak/GoFileEncoder/pkg/translations"
+	"github.com/eliotttak/GoFileEncoder/pkg/translate"
 )
 
 var (
@@ -19,25 +19,26 @@ var (
 )
 
 func main() {
+	translations := translate.GetTranslations()
 
-	communThings.Try(func() error {
+	commonThings.Try(func() error {
 		var err error
 		licenseByte, err = assets.Asset("LICENSE")
 		license = string(licenseByte)
 		return err
 	}, 3)
 
-	fmt.Print(translations.GetTranslations().WhatWouldYouLikeToDo)
+	fmt.Print(translations.Intro.WhatWouldYouLikeToDo)
 	var rep string
 
-	for !(rep == translations.GetTranslations().EncodeInitial || rep == translations.GetTranslations().DecodeInitial || rep == translations.GetTranslations().LicenseInitial) {
+	for !(rep == translations.Intro.EncodeInitial || rep == translations.Intro.DecodeInitial || rep == translations.Intro.LicenseInitial) {
 		time.Sleep(300 * time.Millisecond)
 
 		fmt.Printf(
 			"(%s/%s/%s)>>>",
-			translations.GetTranslations().EncodeInitial,
-			translations.GetTranslations().DecodeInitial,
-			translations.GetTranslations().LicenseInitial,
+			translations.Intro.EncodeInitial,
+			translations.Intro.DecodeInitial,
+			translations.Intro.LicenseInitial,
 		)
 		fmt.Scanf("%s\n", &rep)
 		rep = strings.ToLower(rep)
@@ -45,11 +46,11 @@ func main() {
 	}
 
 	switch rep {
-	case translations.GetTranslations().EncodeInitial:
+	case translations.Intro.EncodeInitial:
 		encoder.Encoder()
-	case translations.GetTranslations().DecodeInitial:
+	case translations.Intro.DecodeInitial:
 		decoder.Decoder()
-	case translations.GetTranslations().LicenseInitial:
+	case translations.Intro.LicenseInitial:
 		fmt.Println(license)
 		main()
 	}

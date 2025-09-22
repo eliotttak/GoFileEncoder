@@ -1,0 +1,36 @@
+{
+  "General": {
+    "EncodedBinFiles": "Encoded binary files (.enc.bin)",
+    "SelectFile": "Select a file",
+    "SaveFile": "Save a file",
+    "PressEnterToSelectFile": "Press [Enter] to select a file...",
+    "YouSelectedFile": "You selected this file: %s.\n\n",
+    "EnterPassword": "Enter the password: ",
+    "PressEnterToSaveFile": "Press [Enter] to save the file...",
+    "AllFiles": "All files"
+  },
+  "CommonThings": {
+    "NoGUI": "No graphical interface has been detected on your computer. Enter the absolute path to your file: ",
+    "EchoedAttempt": "Echoed attempt: %s\n",
+    "ToManyEchoedAttempts": "Too many echoed attempts",
+    "Hour": "hour",
+    "Hours": "hours",
+    "Minute": "minute",
+    "Minutes": "minutes",
+    "Second": "second",
+    "Seconds": "seconds",
+    "Time": "%d %s, %02d %s and %02d.%06d %s"
+  },
+  "Intro": {
+    "WhatWouldYouLikeToDo": "What would you like to do?\n - Encode a file (e)\n - Decode a file (d)\n - Read the license (l)\n",
+    "EncodeInitial": "e",
+    "DecodeInitial": "d",
+    "LicenseInitial": "l"
+  },
+  "Encoding": {
+    "FileEncodedIn": "File encoded in %s.\n"
+  },
+  "Decoding": {
+    "FileDecodedIn": "File decoded in %s.\n"
+  }
+}

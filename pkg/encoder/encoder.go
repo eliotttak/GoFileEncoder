@@ -8,8 +8,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/eliotttak/GoFileEncoder/pkg/communThings"
-	"github.com/eliotttak/GoFileEncoder/pkg/translations"
+	"github.com/eliotttak/GoFileEncoder/pkg/commonThings"
+	"github.com/eliotttak/GoFileEncoder/pkg/translate"
 
 	"golang.org/x/term"
 )
@@ -40,56 +40,58 @@ func encodeChunk(originalChunk []byte, pwd []byte, pwdIndex *int, cryptedFile *o
 		(*pwdIndex)++
 	}
 
-	communThings.Try(func() error {
+	commonThings.Try(func() error {
 		_, err := cryptedFile.Write(cryptedFileBlock)
 		return err
 	}, 3)
 }
 
 func Encoder() {
-	fmt.Println(translations.GetTranslations().PressEnterToSelectFile)
+	translations := translate.GetTranslations()
+
+	fmt.Println(translations.General.PressEnterToSelectFile)
 	fmt.Scanln()
 	var originalFilePath string
 
-	communThings.Try(func() error {
+	commonThings.Try(func() error {
 		var err error
-		originalFilePath, err = communThings.SelectFilePath(
-			translations.GetTranslations().SelectFile,
-			communThings.SelectFilePathFilters{},
+		originalFilePath, err = commonThings.SelectFilePath(
+			translations.General.SelectFile,
+			commonThings.SelectFilePathFilters{},
 			"",
 			"",
-			communThings.Load,
+			commonThings.Load,
 		)
 		return err
 	}, 3)
 
-	fmt.Printf(translations.GetTranslations().YouSelectedFile, originalFilePath)
+	fmt.Printf(translations.General.YouSelectedFile, originalFilePath)
 
-	fmt.Print(translations.GetTranslations().EnterPassword)
+	fmt.Print(translations.General.EnterPassword)
 	pwd, _ := term.ReadPassword(int(syscall.Stdin))
 
 	fmt.Println()
 
-	fmt.Println(translations.GetTranslations().PressEnterToSaveFile)
+	fmt.Println(translations.General.PressEnterToSaveFile)
 	fmt.Scanln()
 	var cryptedFilePath string
 
-	communThings.Try(func() error {
+	commonThings.Try(func() error {
 		var err error
-		cryptedFilePath, err = communThings.SelectFilePath(
-			translations.GetTranslations().SaveFile,
-			communThings.SelectFilePathFilters{
-				{translations.GetTranslations().EncodedBinFiles, "enc.bin"},
-				{translations.GetTranslations().AllFiles, "*"},
+		cryptedFilePath, err = commonThings.SelectFilePath(
+			translations.General.SaveFile,
+			commonThings.SelectFilePathFilters{
+				{translations.General.EncodedBinFiles, "enc.bin"},
+				{translations.General.AllFiles, "*"},
 			},
 			filepath.Base(originalFilePath+".enc.bin"),
 			"",
-			communThings.Save,
+			commonThings.Save,
 		)
 		return err
 	}, 3)
 
-	fmt.Printf(translations.GetTranslations().YouSelectedFile, cryptedFilePath)
+	fmt.Printf(translations.General.YouSelectedFile, cryptedFilePath)
 
 	const chunkSize int64 = 1024 * 16
 
@@ -100,13 +102,13 @@ func Encoder() {
 		cryptedFile       *os.File
 	)
 
-	communThings.Try(func() error {
+	commonThings.Try(func() error {
 		var err error
 		originalFile, err = os.Open(originalFilePath)
 		return err
 	}, 3)
 
-	communThings.Try(func() error {
+	commonThings.Try(func() error {
 		var err error
 		cryptedFile, err = os.Create(cryptedFilePath)
 		return err
@@ -125,7 +127,7 @@ func Encoder() {
 	for {
 		isFinished := false
 
-		communThings.Try(func() error {
+		commonThings.Try(func() error {
 			readBytesNumber, err := originalFile.Read(originalFileChunk)
 
 			if err == io.EOF && readBytesNumber == 0 {
@@ -133,7 +135,7 @@ func Encoder() {
 				timeAfter = time.Now()
 
 				timeBetween = timeAfter.Sub(timeBefore)
-				fmt.Printf(translations.GetTranslations().FileEncodedIn, communThings.FormatDuration(timeBetween))
+				fmt.Printf(translations.Encoding.FileEncodedIn, commonThings.FormatDuration(timeBetween))
 				return nil
 			}
 			return err
@@ -149,7 +151,7 @@ func Encoder() {
 	}
 
 	var originalFileStats os.FileInfo
-	communThings.Try(func() error {
+	commonThings.Try(func() error {
 		var err error
 		originalFileStats, err = originalFile.Stat()
 		return err

@@ -25,6 +25,15 @@ Je ne suis pas un pro en Go, donc si vous trouvez un bug, ou simplement voulez f
     - [Exécution](#exécution)
       - [En Bash](#en-bash-1)
       - [En Batch](#en-batch-1)
+  - [Traductions](#traductions)
+    - [Installer une langue](#installer-une-langue)
+    - [Définir la langue à utiliser](#définir-la-langue-à-utiliser)
+      - [1. Aucun fichier de traduction installé](#1-aucun-fichier-de-traduction-installé)
+      - [2. Un seul fichier de traduction installé](#2-un-seul-fichier-de-traduction-installé)
+      - [3. Plusieurs (2 ou plus) fichiers de configuration installés](#3-plusieurs-2-ou-plus-fichiers-de-configuration-installés)
+    - [Créer un fichier de traduction](#créer-un-fichier-de-traduction)
+      - [Nom du fichier](#nom-du-fichier)
+      - [Contenu du fichier](#contenu-du-fichier)
   - [Utilisation](#utilisation)
     - [1. Encoder ou décoder ?](#1-encoder-ou-décoder-)
     - [2. Sélectionnez un fichier](#2-sélectionnez-un-fichier)
@@ -98,6 +107,38 @@ build.bat
 rem Vous pouvez écrire une autre OS ou architecture.
 ```
 
+---
+
+## Traductions
+### Installer une langue
+Téléchargez un fichier de traduction (par ex. [`translate-fr-FR.json`](./translationFiles/translate-fr-FR.json)) et placez-le dans le même dossier que l'exécutable.
+
+### Définir la langue à utiliser
+Le choix de la langue à utiliser est en partie automatisé. Voici les détails :
+#### 1. Aucun fichier de traduction installé
+Dans cette configuration, la langue utilisée sera l'angais britanique (`en-GB`).
+#### 2. Un seul fichier de traduction installé
+Dans cette configuration, le fichier de traduction installé sera utilisé.
+#### 3. Plusieurs (2 ou plus) fichiers de configuration installés
+Dans cette configuration, à chaque lancement du programme, les langues disponibles seront listées, et vous serez invité à en choisir une.
+
+### Créer un fichier de traduction
+#### Nom du fichier
+Le nom du fichier doit être au format `translate-ab-CD.json`, par ex. `translate-fr-FR.json`.
+
+#### Contenu du fichier 
+Le fichier est au format `JSON`.
+
+Le fichier est composé de quatre grandes parties :
+- `General` contient les traductions qui seront utilisées par au moins 2 packages différents.
+- `Intro` contient les traductions utilisées uniquement par le package `main`.
+- `CommonThings` contient les traductions utilisées uniquement par le package `commonThings`.
+- `Encoding` contient les traductions utilisées uniquement par le package `encoder`.
+- `Decoding` contient les traductions utilisées uniquement par le package `decoder`.
+
+Chaque paire `"clé": "valeur"` correspond à une phrase ou groupe de mots qui sera affiché par le programme. 
+
+Vous pouvez vous inspirer d'[un fichier déjà existant](./translationFiles/).
 
 ---
 

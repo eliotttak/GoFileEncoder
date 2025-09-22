@@ -1,4 +1,15 @@
 {
+  "General": {
+    "EncodedBinFiles": "Ficheiros binários encriptados (.enc.bin)",
+    "SelectFile": "Selecionar um ficheiro",
+    "SaveFile": "Guardar um ficheiro",
+    "PressEnterToSelectFile": "Prima [Enter] para selecionar um ficheiro...",
+    "YouSelectedFile": "Selecionou este : %s\n\n",
+    "EnterPassword": "Introduzir a palavra-passe : ",
+    "PressEnterToSaveFile": "Prima [Enter] para guardar o ficheiro...",
+    "AllFiles": "Todos os ficheiros"
+  },
+  "CommonThings": {
     "NoGUI": "Não foi detectada nenhuma interface gráfica. Introduza o caminho absoluto para o seu ficheiro : ",
     "EchoedAttempt": "Tentativa falhada : %s\n",
     "ToManyEchoedAttempts": "Demasiadas tentativas falhadas",
@@ -8,19 +19,18 @@
     "Minutes": "minutos",
     "Second": "segundo",
     "Seconds": "segundos",
-    "Time": "%d %s, %02d %s e %02d,%06d %s",
-    "PressEnterToSelectFile": "Prima [Enter] para selecionar um ficheiro...",
-    "SelectFile": "Selecionar um ficheiro",
-    "EncodedBinFiles": "Ficheiros binários encriptados (.enc.bin)",
-    "AllFiles": "Todos os ficheiros",
-    "YouSelectedFile": "Selecionou este : %s\n\n",
-    "EnterPassword": "Introduzir a palavra-passe : ",
-    "PressEnterToSaveFile": "Prima [Enter] para guardar o ficheiro...",
-    "SaveFile": "Guardar um ficheiro",
-    "FileDecodedIn": "Ficheiro descodificado em %s.\n",
-    "FileEncodedIn": "Ficheiro codificado em %s.\n",
+    "Time": "%d %s, %02d %s e %02d,%06d %s"
+  },
+  "Intro": {
     "WhatWouldYouLikeToDo": "O que é que gostaria de fazer?\n - Codificar um ficheiro (c)\n - Descodificar um ficheiro (d)\n - Ler a licença (l)\n",
     "EncodeInitial": "c",
     "DecodeInitial": "d",
     "LicenseInitial": "l"
+  },
+  "Encoding": {
+    "FileEncodedIn": "Ficheiro codificado em %s.\n"
+  },
+  "Decoding": {
+    "FileDecodedIn": "Ficheiro descodificado em %s.\n"
+  }
 }

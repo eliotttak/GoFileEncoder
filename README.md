@@ -2,6 +2,7 @@
 
 > &#x1F1EB;&#x1F1F7; Vous parlez français ? Ouvrez [LISEZMOI.md](LISEZMOI.md) en français
 
+
 ## Introduction
 
 GoFileEncoder is a little file encoder that uses the [XOR encryption](https://en.wikipedia.org/wiki/XOR_cipher). It is coded in Golang, and is compiled for several OSs (Windows&reg;, Linux&reg;, and soon macOS&reg;).
@@ -25,6 +26,15 @@ I am not a pro in Go, so if you find a bug, or simply want to make a suggestion,
     - [Running](#running)
       - [In Bash](#in-bash-1)
       - [In Batch](#in-batch-1)
+  - [Translations](#translations)
+    - [Install a language](#install-a-language)
+    - [Define th language to use](#define-th-language-to-use)
+      - [1. No translation file installed](#1-no-translation-file-installed)
+      - [2. Only one translation file installed](#2-only-one-translation-file-installed)
+      - [3. Several (2 or more) translation files installed](#3-several-2-or-more-translation-files-installed)
+    - [Create a translation file](#create-a-translation-file)
+      - [File name](#file-name)
+      - [File content](#file-content)
   - [Usage](#usage)
     - [1. Encode or decode?](#1-encode-or-decode)
     - [2. Select a file](#2-select-a-file)
@@ -98,6 +108,34 @@ build.bat
 .\bin\portables\GoFileEncoder_portable_windows_amd64.exe
 rem You can write another OS or architecture.
 ```
+---
+
+## Translations
+### Install a language
+Download a translation file (e.g. [`translate-en-GB.json`](/translationFiles/translate-en-GB.json)) and place it in the same folder as the executable.
+
+### Define th language to use
+The choice of the language to use is partly automated. Here are the details:
+#### 1. No translation file installed
+In this configuration, the language used will be British English (`en-GB`).
+#### 2. Only one translation file installed
+In this configuration, the translation file installed will be used.
+#### 3. Several (2 or more) translation files installed
+In this configuration, each time the program is starting, the available languages will be listed, and you will be invited to choice one.
+
+### Create a translation file
+#### File name
+The file name must be in the format `translate-ab-CD.json`, e.g. `translate-en-GB.json`.
+
+#### File content
+The file is in the `JSON` format.
+
+The file is composed of four main parts:
+- `general` contains the translations that will be used by at least 2 differents packages.
+- `Intro` contains the translations used only by the package `main`.
+- `CommonThings` contains the translations used only by the package `commonThings`.
+- `Encoding` contains the translations used only by the package `encoder`.
+- `Decoding` contains the translations used only by the package `decoder`. 
 
 ---
 
@@ -132,7 +170,7 @@ After it, you will be asked for a password. Enter it then confirm by pressing <k
 
 ### 4. Choose the destination file
 
-Then, the program will ask you to press <kbd>Entrée</kbd> to choose the destination file. Do it, and a popup will aappear. Select the file to create, then confirm.
+Then, the program will ask you to press <kbd>Enter</kbd> to choose the destination file. Do it, and a popup will aappear. Select the file to create, then confirm.
 > &#x1F6C8; If you cancel, the popup will appear back twice, then at the 3<sup>rd</sup>, the message `"Trop de tentatives échouées"` (`Too many failed attempts`) will be displayed and the program will be closed.
 
 > &#x1F6C8; If your configuration don't include graphic interface, you will have to enter manually the absolute path to your file.

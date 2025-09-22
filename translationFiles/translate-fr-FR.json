@@ -1,4 +1,15 @@
 {
+  "General": {
+    "EncodedBinFiles": "Fichiers binaires encodés (.enc.bin)",
+    "SelectFile": "Sélectionnez un fichier",
+    "SaveFile": "Sauvegardez un fichier",
+    "PressEnterToSelectFile": "Appuyez sur [Entrée] pour sélectionner un fichier...",
+    "YouSelectedFile": "Vous avez sélectionné ce fichier : %s\n\n",
+    "EnterPassword": "Entrez le mot de passe : ",
+    "PressEnterToSaveFile": "Appuyez sur [Entrée] pour sauvegarder le fichier...",
+    "AllFiles": "Tous les fichiers"
+  },
+  "CommonThings": {
     "NoGUI": "Aucune interface graphique n'a été détectée. Entrez le chemin absolu vers votre fichier : ",
     "EchoedAttempt": "Tentative echouée : %s\n",
     "ToManyEchoedAttempts": "Trop de tentatives échouées",
@@ -8,19 +19,18 @@
     "Minutes": "minutes",
     "Second": "seconde",
     "Seconds": "secondes",
-    "Time": "%d %s, %02d %s et %02d,%06d %s",
-    "PressEnterToSelectFile": "Appuyez sur [Entrée] pour sélectionner un fichier...",
-    "SelectFile": "Sélectionnez un fichier",
-    "EncodedBinFiles": "Fichiers binaires encodés (.enc.bin)",
-    "AllFiles": "Tous les fichiers",
-    "YouSelectedFile": "Vous avez sélectionné ce fichier : %s\n\n",
-    "EnterPassword": "Entrez le mot de passe : ",
-    "PressEnterToSaveFile": "Appuyez sur [Entrée] pour sauvegarder le fichier...",
-    "SaveFile": "Sauvegardez un fichier",
-    "FileDecodedIn": "Fichier décodé en %s.\n",
-    "FileEncodedIn": "Fichier encodé en %s.\n",
+    "Time": "%d %s, %02d %s et %02d,%06d %s"
+  },
+  "Intro": {
     "WhatWouldYouLikeToDo": "Que souhaitez-vous faire ?\n - Encoder un fichier (e)\n - Décoder un fichier (d)\n - Lire la license (l)\n",
     "EncodeInitial": "e",
     "DecodeInitial": "d",
     "LicenseInitial": "l"
+  },
+  "Encoding": {
+    "FileEncodedIn": "Fichier encodé en %s.\n"
+  },
+  "Decoding": {
+    "FileDecodedIn": "Fichier décodé en %s.\n"
+  }
 }
