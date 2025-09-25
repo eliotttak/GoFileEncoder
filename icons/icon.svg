@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256">
+
+    <g fill="#BFBFFF">
+        <path d="
+            M 143,16
+            V 96
+            H 40
+            V 21
+            A 5 5 0 0 1 44,16
+            Z
+            "/>
+        <path d="
+            M 40,95
+            H 215
+            V 234
+            A 5 5 0 0 1 210,239
+            H 45
+            A 5 5 0 0 1 40,234
+            Z
+            "/>
+    </g>
+    <path d="
+        M 134,16
+        H 150
+        L 215,81
+        V 97
+        H 139
+        A 5 5 0 0 1 134,92
+        Z
+        " fill="#7070FF" />
+    
+    <rect x="80" y="148" width="96" height="80" rx="3" fill="#FFBA00"/>
+    <g fill="black">
+        <circle cx="128" cy="178" r="12" />
+        <polygon points="128,188 138,214 118,214" />
+    </g>
+    <path d="
+    M 95,148
+    V 133
+    A 33 33 0 0 1 161,133
+    V 148
+    H 151
+    V 133
+    A 23 23 0 0 0 105,133
+    V 148
+    Z
+    " fill="#808080"/>
+</svg>
