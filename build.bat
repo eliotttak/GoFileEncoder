@@ -1,7 +1,5 @@
 @echo off
 
-setlocal enabledelayedexpansion
-
 set GOOS=%1
 set GOARCH=%2
 set EXT=
@@ -25,12 +23,27 @@ if "%GOOS%" == "windows" (
     set EXT=.exe
 )
 
-echo Building from .\pkg\ to .\bin\portables\GoFileEncoder_portable_%GOOS%_%GOARCH%%EXT%
+set TARGET=.\bin\portables\GoFileEncoder_portable_%GOOS%_%GOARCH%%EXT%
+
+
+echo Building from .\pkg\ to %TARGET%
 
 mkdir .\bin\portables\
 
-rsrc -arch=%GOARCH% -ico icons\icon_16.ico,icons\icon_32.ico,icons\icon_64.ico,icons\icon_128.ico,icons\icon_256.ico -o .\pkg\rsrc.syso
+rm %TARGET%
 
+echo Creating assets
 go-bindata -pkg assets -o assets/bindata.go LICENSE
 
-go build -o .\bin\portables\GoFileEncoder_portable_%GOOS%_%GOARCH%%EXT% %BUILDOPTIONS% .\pkg\
+echo Building
+go build -o %TARGET% .\pkg\
+
+if "%GOOS%" == "windows" (
+    echo Creating icon
+    svg_to_ico --input icons\icon.svg --output icons\icon.ico
+
+    echo Adding icons
+    resourcehacker -open %TARGET% -save %TARGET% -action addoverwrite -resource icons\icon.ico -mask ICONGROUP,MAINICON,
+
+    rm icons\icon.ico
+)

@@ -1,7 +1,8 @@
+
+
 # GoFileEncoder
 
 > &#x1F1EB;&#x1F1F7; Vous parlez français ? Ouvrez [LISEZMOI.md](LISEZMOI.md) en français
-
 
 ## Introduction
 
@@ -10,11 +11,10 @@ GoFileEncoder is a little file encoder that uses the [XOR encryption](https://en
 I am not a pro in Go, so if you find a bug, or simply want to make a suggestion, I am totally open to [issues](https://github.com/eliotttak/GoFileEncoder/issues), [pull requests_](https://github.com/eliotttak/GoFileEncoder/pulls) and to the [discussion](https://github.com/eliotttak/GoFileEncoder/discussions).
 
 ---
-
-## Summary
+## Table of Content
 - [GoFileEncoder](#gofileencoder)
   - [Introduction](#introduction)
-  - [Summary](#summary)
+  - [Table of Content](#table-of-content)
   - [Building](#building)
     - [Cloning](#cloning)
     - [Package dependencies tree](#package-dependencies-tree)
@@ -28,7 +28,7 @@ I am not a pro in Go, so if you find a bug, or simply want to make a suggestion,
       - [In Batch](#in-batch-1)
   - [Translations](#translations)
     - [Install a language](#install-a-language)
-    - [Define th language to use](#define-th-language-to-use)
+    - [Define the language to use](#define-the-language-to-use)
       - [1. No translation file installed](#1-no-translation-file-installed)
       - [2. Only one translation file installed](#2-only-one-translation-file-installed)
       - [3. Several (2 or more) translation files installed](#3-several-2-or-more-translation-files-installed)
@@ -44,6 +44,7 @@ I am not a pro in Go, so if you find a bug, or simply want to make a suggestion,
     - [6. All's done!](#6-alls-done)
   - [License](#license)
 
+---
 
 ## Building
 
@@ -76,12 +77,19 @@ Refer to the file [go.mod](./go.mod) for more details.
 ### Building dependencies
 - `github.com/go-bindata/go-bindata/go-bindata/...` (to create the assets file)
 
+Only for Windows&reg;:
+
+- `svg_to_ico` ([Ortham/svg_to_ico](https://github.com/Ortham/svg_to_ico)) must be in `$PATH` or `%PATH%` (to convert the SVG icon into the ICO format)
+- `resourcehacker` ([www.angusj.com/resourcehacker/#download](https://www.angusj.com/resourcehacker/#download)) must be in `$PATH` or `%PATH%` (to add the icon to the executable)
+
 ### Dependencies installing
 ```bash
 go mod tidy
 go install github.com/go-bindata/go-bindata/go-bindata/...
 go get
 ```
+
+You also have to install manually Resource Hacker and `svg_to_ico`.
 
 ### Compiling and creating assets package
 
@@ -135,7 +143,7 @@ The file is composed of five main parts:
 - `Intro` contains the translations used only by the package `main`.
 - `CommonThings` contains the translations used only by the package `commonThings`.
 - `Encoding` contains the translations used only by the package `encoder`.
-- `Decoding` contains the translations used only by the package `decoder`. 
+- `Decoding` contains the translations used only by the package `decoder`.
 
 ---
 
@@ -186,4 +194,3 @@ After a few seconds, the file is encoded or decoded. The programme closes automa
 This software is distributed under the GNU GENERAL PUBLIC LICENSE version 3 (GNU GPL v3).
 
 [See the license](LICENSE)
-

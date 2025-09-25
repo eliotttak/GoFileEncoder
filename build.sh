@@ -16,9 +16,14 @@ if [ "$GOOS" == "windows" ]; then
     EXT=".exe"
 fi
 
-echo "Building from ./pkg/ to ./bin/portables/GoFileEncoder_portable_${GOOS}_${GOARCH}${EXT}"
+TARGET="./bin/portables/GoFileEncoder_portable_${GOOS}_${GOARCH}${EXT}"
 
-mkdir -p "./bin/portables"
+rm $TARGET
 
+echo "Building from ./pkg/ to $TARGET"
+
+echo Creating assets
 go-bindata -pkg "assets" -o "assets/bindata.go" "LICENSE"
+
+echo Building
 go build -o "./bin/portables/GoFileEncoder_portable_${GOOS}_${GOARCH}${EXT}" "./pkg/GoFileEncoder.go"

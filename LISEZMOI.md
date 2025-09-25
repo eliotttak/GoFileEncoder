@@ -9,7 +9,6 @@ GoFileEncoder est un petit encodeur de fichiers qui utilise l'[encryption XOR <s
 Je ne suis pas un pro en Go, donc si vous trouvez un bug, ou simplement voulez faire une suggestion, je suis totalement ouvert aux [_issues_ <sup>(EN)</sup>](https://github.com/eliotttak/GoFileEncoder/issues), [_pull requests_ <sup>(EN)</sup>](https://github.com/eliotttak/GoFileEncoder/pulls) et à la [discussion <sup>(EN)</sup>](https://github.com/eliotttak/GoFileEncoder/discussions).
 
 ---
-
 ## Sommaire
 - [GoFileEncoder](#gofileencoder)
   - [Introduction](#introduction)
@@ -43,6 +42,7 @@ Je ne suis pas un pro en Go, donc si vous trouvez un bug, ou simplement voulez f
     - [6. Terminé !](#6-terminé-)
   - [License](#license)
 
+---
 
 ## Construction
 
@@ -75,6 +75,9 @@ Se réferer au fichier [go.mod](./go.mod) pour plus de détails.
 ### Dépendances de construction
 
 - `github.com/go-bindata/go-bindata/go-bindata/...` (pour créer le fichier d'_assets_)
+Seulement pour Windows&reg;:
+- `svg_to_ico` ([Ortham/svg_to_ico](https://github.com/Ortham/svg_to_ico)) doit être dans `$PATH` ou `%PATH%` (pour convertir l'icône SVG en ICO)
+- `resourcehacker` ([www.angusj.com/resourcehacker/#download](https://www.angusj.com/resourcehacker/#download)) doit être dans `$PATH` ou `%PATH%` (pour intégrer l'icône à l'exécutable)
 
 ### Installation des dépendances
 ```bash
@@ -82,6 +85,9 @@ go mod tidy
 go install github.com/go-bindata/go-bindata/go-bindata/...
 go get
 ```
+
+Vous allez aussi devoir installer manuellement Resource Hacker et `svg_to_ico`
+
 ### Compilation et création du _package_ d'assets
 
 #### En Bash
@@ -126,17 +132,17 @@ Dans cette configuration, à chaque lancement du programme, les langues disponib
 #### Nom du fichier
 Le nom du fichier doit être au format `translate-ab-CD.json`, par ex. `translate-fr-FR.json`.
 
-#### Contenu du fichier 
+#### Contenu du fichier
 Le fichier est au format `JSON`.
 
-Le fichier est composé de quatre grandes parties :
+Le fichier est composé de cinq grandes parties :
 - `General` contient les traductions qui seront utilisées par au moins 2 packages différents.
 - `Intro` contient les traductions utilisées uniquement par le package `main`.
 - `CommonThings` contient les traductions utilisées uniquement par le package `commonThings`.
 - `Encoding` contient les traductions utilisées uniquement par le package `encoder`.
 - `Decoding` contient les traductions utilisées uniquement par le package `decoder`.
 
-Chaque paire `"clé": "valeur"` correspond à une phrase ou groupe de mots qui sera affiché par le programme. 
+Chaque paire `"clé": "valeur"` correspond à une phrase ou groupe de mots qui sera affiché par le programme.
 
 Vous pouvez vous inspirer d'[un fichier déjà existant](./translationFiles/).
 
@@ -188,4 +194,3 @@ Au bout de quelques secondes, le fichier est encodé ou décodé. Le programme s
 Ce logiciel est distribué sous la license GNU GENERAL PUBLIC LICENSE version 3 (GNU GPL v3).
 
 [Voir la license <sup>(EN)</sup>](LICENSE)
-
