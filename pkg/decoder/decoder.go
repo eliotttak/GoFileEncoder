@@ -1,3 +1,19 @@
+// Copyright 2025 Eliott Takvorian
+//
+// This file is part of GoFileEncoder.
+//
+// GoFileEncoder is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
 package decoder
 
 import (
@@ -17,7 +33,7 @@ import (
 
 func removeExtentions(path string, nExtensions int) string {
 	var result string = path
-	for x := 0; x < nExtensions; x++ {
+	for range nExtensions {
 		var ext string = filepath.Ext(result)
 		if ext == "" {
 			break
@@ -27,12 +43,29 @@ func removeExtentions(path string, nExtensions int) string {
 	return result
 }
 
-func decodeByte(cryptedByte byte, pwdByte byte, originalByte *byte) {
-	*originalByte = cryptedByte ^ pwdByte
+func decodeByte(cryptedByte byte, pwdByte byte, originalByte *byte, method string) error {
+	var toReturn byte = cryptedByte
+
+	if method != "x" && method != "r" && method != "xr" {
+		return fmt.Errorf("'method' must be either \"x\", \"r\" or \"xr\", so \"%s\" is incorrect", method)
+	}
+
+	// This part make a byte rotation
+	if strings.Contains(method, "r") {
+		rotateN := pwdByte % 8
+		toReturn = (toReturn >> rotateN) | (toReturn << (8 - rotateN))
+	}
+
+	if strings.Contains(method, "x") {
+		toReturn = toReturn ^ pwdByte
+	}
+
+	*originalByte = toReturn
+
+	return nil
 }
 
-func decodeChunk(cryptedChunk []byte, pwd []byte, pwdIndex *int, originalFile *os.File) {
-
+func decodeChunk(cryptedChunk []byte, pwd []byte, pwdIndex *int, originalFile *os.File, method string) error {
 	var (
 		pwdLen            int    = len(pwd)
 		originalFileBlock []byte = []byte{}
@@ -46,7 +79,11 @@ func decodeChunk(cryptedChunk []byte, pwd []byte, pwdIndex *int, originalFile *o
 		var pwdByte byte = pwd[*pwdIndex]
 		var originalByte byte
 
-		decodeByte(cryptedByte, pwdByte, &originalByte)
+		err := decodeByte(cryptedByte, pwdByte, &originalByte, method)
+
+		if err != nil {
+			return err
+		}
 
 		originalFileBlock = append(originalFileBlock, originalByte)
 
@@ -57,9 +94,14 @@ func decodeChunk(cryptedChunk []byte, pwd []byte, pwdIndex *int, originalFile *o
 		_, err := originalFile.Write(originalFileBlock)
 		return err
 	}, 3)
+
+	return nil
 }
 
 func Decoder() {
+
+	var method string
+
 	translations := translate.GetTranslations()
 
 	fmt.Println(translations.General.PressEnterToSelectFile)
@@ -71,7 +113,7 @@ func Decoder() {
 		cryptedFilePath, err = commonThings.SelectFilePath(
 			translations.General.SelectFile,
 			commonThings.SelectFilePathFilters{
-				{translations.General.EncodedBinFiles, "enc.bin"},
+				{translations.General.EncodedBinFiles, "*.gfe*"},
 				{translations.General.AllFiles, "*"},
 			},
 			"",
@@ -95,10 +137,34 @@ func Decoder() {
 
 	var originalFileProposition string
 
-	if strings.HasSuffix(cryptedFilePath, ".enc.bin") {
+	splittedFilePath := strings.Split(cryptedFilePath, ".")
+
+	ext := splittedFilePath[len(splittedFilePath)-1]
+
+	switch ext {
+	case "enc.bin": // Deprecated! Only for compatibility with v1.1.0 and older.
 		originalFileProposition = removeExtentions(cryptedFilePath, 2)
-	} else {
+		method = "x"
+	case "gfe1":
 		originalFileProposition = removeExtentions(cryptedFilePath, 1)
+		method = "x"
+	case "gfe2":
+		fmt.Println("xr")
+		originalFileProposition = removeExtentions(cryptedFilePath, 1)
+		method = "xr"
+	default:
+		originalFileProposition = cryptedFilePath
+		var method string
+
+		fmt.Print(translations.Decoding.WhichEncodingMethodUsed)
+		for !(method == "x" || method == "xr") {
+			time.Sleep(300 * time.Millisecond)
+
+			fmt.Printf("(x/xr)>>> ")
+			fmt.Scanf("%s\n", &method)
+			method = strings.ToLower(method)
+			time.Sleep(300 * time.Millisecond)
+		}
 	}
 
 	var originalFilePath string
@@ -164,7 +230,7 @@ func Decoder() {
 			break
 		}
 
-		decodeChunk(cryptedFileBlock, pwd, &pwdIndex, originalFile)
+		decodeChunk(cryptedFileBlock, pwd, &pwdIndex, originalFile, method)
 
 	}
 

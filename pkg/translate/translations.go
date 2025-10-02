@@ -1,3 +1,19 @@
+// Copyright 2025 Eliott Takvorian
+//
+// This file is part of GoFileEncoder.
+//
+// GoFileEncoder is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <https://www.gnu.org/licenses/>.
 package translate
 
 import (
@@ -44,11 +60,19 @@ type (
 	}
 
 	encodingTranslationsType struct {
-		FileEncodedIn string
+		YesInitial          string
+		NoInitial           string
+		IsPwdOk             string
+		CrackedIn           string
+		MoreThan290         string
+		PasswordValidated   string
+		FileEncodedIn       string
+		WhichEncodingMethod string
 	}
 
 	decodingTranslationsType struct {
-		FileDecodedIn string
+		FileDecodedIn           string
+		WhichEncodingMethodUsed string
 	}
 
 	translationsType struct {
@@ -122,8 +146,9 @@ func GetTranslations() translationsType {
 	} else {
 		var englishTranslations translationsType = translationsType{
 			General: generalTranslationsType{
-				EncodedBinFiles:        "Encoded binary files (.enc.bin)",
+				EncodedBinFiles:        "Encoded binary files",
 				SaveFile:               "Save a file",
+				SelectFile:             "Select a file",
 				PressEnterToSelectFile: "Press [Enter] to select a file...",
 				YouSelectedFile:        "You selected this file: %s.\n\n",
 				EnterPassword:          "Enter the password: ",
@@ -149,10 +174,18 @@ func GetTranslations() translationsType {
 				LicenseInitial:       "l",
 			},
 			Encoding: encodingTranslationsType{
-				FileEncodedIn: "File encoded in %s.\n",
+				YesInitial:          "y",
+				NoInitial:           "n",
+				IsPwdOk:             "Is it right for you?",
+				CrackedIn:           "The password would be cracked in %s\n",
+				MoreThan290:         "more than 90 years.",
+				PasswordValidated:   "The password has been validated.",
+				FileEncodedIn:       "File encoded in %s.\n",
+				WhichEncodingMethod: "Which encoding method would you like to use?\n - Only the XOR encryption (x)\n - Both XOR and Rotate encryption (recommended) (xr)\n",
 			},
 			Decoding: decodingTranslationsType{
-				FileDecodedIn: "File decoded in %s.\n",
+				FileDecodedIn:           "File decoded in %s.\n",
+				WhichEncodingMethodUsed: "Which encryption method has been used to encode this file?\n - Only the XOR encryption (x)\n - Both XOR and Rotate encryption (xr)\n",
 			},
 		}
 

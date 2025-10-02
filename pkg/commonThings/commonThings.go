@@ -1,13 +1,29 @@
+// Copyright 2025 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package commonThings
 
 import (
+	"errors"
 	"fmt"
 	"log"
+	"path"
 	"time"
 
 	"github.com/christianhujer/isheadless"
 	"github.com/eliotttak/GoFileEncoder/pkg/translate"
-	"github.com/sqweek/dialog"
+	"github.com/kjk/goey/dialog"
 )
 
 type (
@@ -36,36 +52,58 @@ func SelectFilePath(
 		fmt.Scanln(&path)
 		return path, nil
 	} else {
-		var popup *dialog.FileBuilder = dialog.File()
-
-		if title != "" {
-			popup = popup.Title(title)
-		}
-
-		for _, filter := range filters {
-			popup = popup.Filter(filter[0], filter[1])
-		}
-
-		if startFile != "" {
-			popup = popup.SetStartFile(startFile)
-		}
-
-		if startDir != "" {
-			popup = popup.SetStartDir(startDir)
-		}
-
 		switch actionType {
-		case Save:
-			return popup.Save()
 		case Load:
-			return popup.Load()
+			var dialogBox *dialog.OpenFile = dialog.NewOpenFile()
+
+			if title != "" {
+				dialogBox = dialogBox.WithTitle(title)
+			}
+
+			for _, filter := range filters {
+				dialogBox = dialogBox.AddFilter(filter[0], filter[1])
+			}
+
+			if startFile != "" || startDir != "" {
+				dialogBox = dialogBox.WithFilename(path.Join(startDir, startFile))
+			}
+
+			result, err := dialogBox.Show()
+
+			if result == "" {
+				err = errors.New("no file selected")
+			}
+
+			return result, err
+		case Save:
+			var dialogBox *dialog.SaveFile = dialog.NewSaveFile()
+
+			if title != "" {
+				dialogBox = dialogBox.WithTitle(title)
+			}
+
+			for _, filter := range filters {
+				dialogBox = dialogBox.AddFilter(filter[0], filter[1])
+			}
+
+			if startFile != "" || startDir != "" {
+				dialogBox = dialogBox.WithFilename(path.Join(startDir, startFile))
+			}
+
+			result, err := dialogBox.Show()
+
+			if result == "" {
+				err = errors.New("no file selected")
+			}
+
+			return result, err
 		default:
 			return "", fmt.Errorf("'actionType' must be either \"save\" ('Save') or \"load\" ('Load'), so \"%s\" is incorrect", actionType)
 		}
 	}
 }
 
-func tern[T any](cond bool, ifTrue T, ifFalse T) T {
+func Tern[T any](cond bool, ifTrue T, ifFalse T) T {
 	if cond {
 		return ifTrue
 	} else {
@@ -101,7 +139,7 @@ func FormatDuration(duration time.Duration) string {
 	microseconds := int(duration.Microseconds()) % 1000000
 	return fmt.Sprintf(
 		translations.CommonThings.Time,
-		hours, tern(hours >= 2, translations.CommonThings.Hours, translations.CommonThings.Hour),
-		minutes, tern(minutes >= 2, translations.CommonThings.Minutes, translations.CommonThings.Minute),
-		seconds, microseconds, tern(seconds >= 2, translations.CommonThings.Seconds, translations.CommonThings.Second))
+		hours, Tern(hours >= 2, translations.CommonThings.Hours, translations.CommonThings.Hour),
+		minutes, Tern(minutes >= 2, translations.CommonThings.Minutes, translations.CommonThings.Minute),
+		seconds, microseconds, Tern(seconds >= 2, translations.CommonThings.Seconds, translations.CommonThings.Second))
 }

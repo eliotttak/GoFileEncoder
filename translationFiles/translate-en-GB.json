@@ -1,6 +1,6 @@
 {
   "General": {
-    "EncodedBinFiles": "Encoded binary files (.enc.bin)",
+    "EncodedBinFiles": "Encoded binary files",
     "SelectFile": "Select a file",
     "SaveFile": "Save a file",
     "PressEnterToSelectFile": "Press [Enter] to select a file...",
@@ -28,7 +28,14 @@
     "LicenseInitial": "l"
   },
   "Encoding": {
-    "FileEncodedIn": "File encoded in %s.\n"
+    "YesInitial": "y",
+    "NoInitial": "n",
+    "IsPwdOk": "Is it right for you?",
+    "CrackedIn": "The password would be cracked in %s\n",
+		"MoreThan290": "more than 90 years.",
+    "PasswordValidated": "The password has been validated.",
+    "FileEncodedIn": "File encoded in %s.\n",
+		"WhichEncodingMethod": "Which encoding method would you like to use?\n - Only the XOR encryption (x)\n - Both XOR and Rotate encryption (recommended) (xr)\n"
   },
   "Decoding": {
     "FileDecodedIn": "File decoded in %s.\n"

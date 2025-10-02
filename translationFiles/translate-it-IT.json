@@ -1,6 +1,6 @@
 {
   "General": {
-    "EncodedBinFiles": "File binari criptati (.enc.bin)",
+    "EncodedBinFiles": "File binari criptati",
     "SelectFile": "Selezionare un file",
     "SaveFile": "Salvataggio di un file",
     "PressEnterToSelectFile": "Premere [Invio] per selezionare un file...",
@@ -28,7 +28,14 @@
     "LicenseInitial": "l"
   },
   "Encoding": {
-    "FileEncodedIn": "File codificato in %s.\n"
+    "YesInitial": "s",
+    "NoInitial": "n",
+    "IsPwdOk": "Siete soddisfatti di questo?",
+    "CrackedIn": "La password verrebbe decifrata in %s\n",
+		"MoreThan290": "più di 90 anni.",
+    "PasswordValidated": "La password è stata convalidata.",
+    "FileEncodedIn": "File codificato in %s.\n",
+    "WhichEncodingMethod": "Quale metodo di crittografia si desidera utilizzare?\n - Solo crittografia XOR (x)\n - Crittografia XOR e rotativa (consigliata) (xr)\n"
   },
   "Decoding": {
     "FileDecodedIn": "File decodificato in %s.\n"
