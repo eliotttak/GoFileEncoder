@@ -1,43 +1,43 @@
 {
   "General": {
-    "EncodedBinFiles": "Fichiers binaires encodés",
-    "SelectFile": "Sélectionnez un fichier",
-    "SaveFile": "Sauvegardez un fichier",
-    "PressEnterToSelectFile": "Appuyez sur [Entrée] pour sélectionner un fichier...",
-    "YouSelectedFile": "Vous avez sélectionné ce fichier : %s\n\n",
-    "EnterPassword": "Entrez le mot de passe : ",
-    "PressEnterToSaveFile": "Appuyez sur [Entrée] pour sauvegarder le fichier...",
-    "AllFiles": "Tous les fichiers"
+    "EncodedBinFiles": "File binari criptati",
+    "SelectFile": "Selezionare un file",
+    "SaveFile": "Salvataggio di un file",
+    "PressEnterToSelectFile": "Premere [Invio] per selezionare un file...",
+    "YouSelectedFile": "Avete selezionato questo file : %s\n\n",
+    "EnterPassword": "Inserire la password : ",
+    "PressEnterToSaveFile": "Premere [Invio] per salvare il file...",
+    "AllFiles": "Tutti i file"
   },
   "CommonThings": {
-    "NoGUI": "Aucune interface graphique n'a été détectée. Entrez le chemin absolu vers votre fichier : ",
-    "EchoedAttempt": "Tentative echouée : %s\n",
-    "ToManyEchoedAttempts": "Trop de tentatives échouées",
-    "Hour": "heure",
-    "Hours": "heures",
-    "Minute": "minute",
-    "Minutes": "minutes",
-    "Second": "seconde",
-    "Seconds": "secondes",
-    "Time": "%d %s, %02d %s et %02d,%06d %s"
+    "NoGUI": "Non è stata rilevata alcuna interfaccia grafica. Inserite il percorso assoluto del vostro file : ",
+    "EchoedAttempt": "Tentativo fallito : %s\n",
+    "ToManyEchoedAttempts": "Troppi tentativi falliti",
+    "Hour": "ora",
+    "Hours": "ore",
+    "Minute": "minuto",
+    "Minutes": "minuti",
+    "Second": "secondo",
+    "Seconds": "secondi",
+    "Time": "%d %s, %02d %s e %02d,%06d %s"
   },
   "Intro": {
-    "WhatWouldYouLikeToDo": "Que souhaitez-vous faire ?\n - Encoder un fichier (e)\n - Décoder un fichier (d)\n - Lire la license (l)\n",
-    "EncodeInitial": "e",
+    "WhatWouldYouLikeToDo": "Cosa ti piacerebbe fare?\n - Codifica di un file (c)\n - Decodifica di un file (d)\n - Leggi la licenza (l)\n",
+    "EncodeInitial": "c",
     "DecodeInitial": "d",
     "LicenseInitial": "l"
   },
   "Encoding": {
-    "YesInitial": "o",
+    "YesInitial": "s",
     "NoInitial": "n",
-    "IsPwdOk": "Cela vous convient-il ?",
-    "CrackedIn": "Le password pourrait être trouvé en %s\n",
-    "MoreThan290": "plus de 290 ans.",
-    "PasswordValidated": "Le mot de passe a été validé.",
-    "FileEncodedIn": "Fichier encodé en %s.\n",
-    "WhichEncodingMethod": "Quelle méthode d'encryption souhaitez-vous utiliser ?\n - Seulement l'encryption XOR (x)\n - À la fois l'encryption XOR et l'encryption par rotation (recommandé) (xr)\n"
+    "IsPwdOk": "Siete soddisfatti di questo?",
+    "CrackedIn": "La password verrebbe decifrata in %s\n",
+    "MoreThan290": "più di 90 anni.",
+    "PasswordValidated": "La password è stata convalidata.",
+    "FileEncodedIn": "File codificato in %s.\n",
+    "WhichEncodingMethod": "Quale metodo di crittografia si desidera utilizzare?\n - Solo crittografia XOR (x)\n - Crittografia XOR e rotativa (consigliata) (xr)\n"
   },
   "Decoding": {
-    "FileDecodedIn": "Fichier décodé en %s.\n"
+    "FileDecodedIn": "File decodificato in %s.\n"
   }
 }
