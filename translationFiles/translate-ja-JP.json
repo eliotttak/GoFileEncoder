@@ -1,43 +1,43 @@
 {
   "General": {
-    "EncodedBinFiles": "Ficheiros binários encriptados",
-    "SelectFile": "Selecionar um ficheiro",
-    "SaveFile": "Guardar um ficheiro",
-    "PressEnterToSelectFile": "Prima [Enter] para selecionar um ficheiro...",
-    "YouSelectedFile": "Selecionou este : %s\n\n",
-    "EnterPassword": "Introduzir a palavra-passe : ",
-    "PressEnterToSaveFile": "Prima [Enter] para guardar o ficheiro...",
-    "AllFiles": "Todos os ficheiros"
+    "EncodedBinFiles": "Encoded binary files",
+    "SelectFile": "Select a file",
+    "SaveFile": "Save a file",
+    "PressEnterToSelectFile": "Press [Enter] to select a file...",
+    "YouSelectedFile": "You selected this file: %s.\n\n",
+    "EnterPassword": "Enter the password: ",
+    "PressEnterToSaveFile": "Press [Enter] to save the file...",
+    "AllFiles": "All files"
   },
   "CommonThings": {
-    "NoGUI": "Não foi detectada nenhuma interface gráfica. Introduza o caminho absoluto para o seu ficheiro : ",
-    "EchoedAttempt": "Tentativa falhada : %s\n",
-    "ToManyEchoedAttempts": "Demasiadas tentativas falhadas",
-    "Hour": "hora",
-    "Hours": "horas",
-    "Minute": "minuto",
-    "Minutes": "minutos",
-    "Second": "segundo",
-    "Seconds": "segundos",
-    "Time": "%d %s, %02d %s e %02d,%06d %s"
+    "NoGUI": "No graphical interface has been detected on your computer. Enter the absolute path to your file: ",
+    "EchoedAttempt": "Echoed attempt: %s\n",
+    "ToManyEchoedAttempts": "Too many echoed attempts",
+    "Hour": "hour",
+    "Hours": "hours",
+    "Minute": "minute",
+    "Minutes": "minutes",
+    "Second": "second",
+    "Seconds": "seconds",
+    "Time": "%d %s, %02d %s and %02d.%06d %s"
   },
   "Intro": {
-    "WhatWouldYouLikeToDo": "O que é que gostaria de fazer?\n - Codificar um ficheiro (c)\n - Descodificar um ficheiro (d)\n - Ler a licença (l)\n",
-    "EncodeInitial": "c",
+    "WhatWouldYouLikeToDo": "What would you like to do?\n - Encode a file (e)\n - Decode a file (d)\n - Read the license (l)\n",
+    "EncodeInitial": "e",
     "DecodeInitial": "d",
     "LicenseInitial": "l"
   },
   "Encoding": {
-    "YesInitial": "s",
+    "YesInitial": "y",
     "NoInitial": "n",
-    "IsPwdOk": "Está satisfeito com isto?",
-    "CrackedIn": "A palavra-passe seria decifrada em %s\n",
-    "MoreThan290": "mais de 90 anos.",
-    "PasswordValidated": "A palavra-passe foi validada.",
-    "FileEncodedIn": "Ficheiro codificado em %s.\n",
-    "WhichEncodingMethod": "Que método de encriptação gostaria de utilizar?\n - Apenas encriptação XOR (x)\n - Encriptação XOR e por rotação (recomendada) (xr)\n"
+    "IsPwdOk": "Is it right for you?",
+    "CrackedIn": "The password would be cracked in %s\n",
+    "MoreThan290": "more than 90 years.",
+    "PasswordValidated": "The password has been validated.",
+    "FileEncodedIn": "File encoded in %s.\n",
+    "WhichEncodingMethod": "Which encoding method would you like to use?\n - Only the XOR encryption (x)\n - Both XOR and Rotate encryption (recommended) (xr)\n"
   },
   "Decoding": {
-    "FileDecodedIn": "Ficheiro descodificado em %s.\n"
+    "FileDecodedIn": "File decoded in %s.\n"
   }
 }
