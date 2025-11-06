@@ -1,0 +1,3 @@
+files:
+  - source: '/translationFiles/translate-[a-z][a-z]-[A-Z][A-Z].json'
+    translation: /translationFiles/translate-%locale%.json
