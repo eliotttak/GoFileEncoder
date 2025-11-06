@@ -14,7 +14,9 @@
            with:
              api_token: ${{ secrets.LOKALISE_API_TOKEN }}
              project_id: 18122020690d152873da30.32552063
-             base_lang: en
+             base_lang: en-GB
              translations_path: translationFiles
              file_format: json
              file_ext: json
+             flat_naming: true
+             skip_include_tags: true
