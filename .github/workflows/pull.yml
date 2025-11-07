@@ -20,3 +20,4 @@
              file_ext: json
              flat_naming: true
              skip_include_tags: true
+             replace_breaks: false
