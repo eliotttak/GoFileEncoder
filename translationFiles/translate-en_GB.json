@@ -1,0 +1,43 @@
+{
+    "CommonThings": {
+        "EchoedAttempt": "Echoed attempt: %s\\n",
+        "Hour": "hour",
+        "Hours": "hours",
+        "Minute": "minute",
+        "Minutes": "minutes",
+        "NoGUI": "No graphical interface has been detected on your computer. Enter the absolute path to your file: ",
+        "Second": "second",
+        "Seconds": "seconds",
+        "Time": "%d %s, %02d %s and %02d.%06d %s",
+        "ToManyEchoedAttempts": "Too many echoed attempts"
+    },
+    "Decoding": {
+        "FileDecodedIn": "File decoded in %s.\\n"
+    },
+    "Encoding": {
+        "CrackedIn": "The password would be cracked in %s\\n",
+        "FileEncodedIn": "File encoded in %s.\\n",
+        "IsPwdOk": "Is it right for you?",
+        "MoreThan290": "more than 90 years.",
+        "NoInitial": "n",
+        "PasswordValidated": "The password has been validated.",
+        "WhichEncodingMethod": "Which encoding method would you like to use?\\n - Only the XOR encryption (x)\\n - Both XOR and Rotate encryption (recommended) (xr)\\n",
+        "YesInitial": "y"
+    },
+    "General": {
+        "AllFiles": "All files",
+        "EncodedBinFiles": "Encoded binary files",
+        "EnterPassword": "Enter the password: ",
+        "PressEnterToSaveFile": "Press [Enter] to save the file...",
+        "PressEnterToSelectFile": "Press [Enter] to select a file...",
+        "SaveFile": "Save a file",
+        "SelectFile": "Select a file",
+        "YouSelectedFile": "You selected this file: %s.\\n\\n"
+    },
+    "Intro": {
+        "DecodeInitial": "d",
+        "EncodeInitial": "e",
+        "LicenseInitial": "l",
+        "WhatWouldYouLikeToDo": "What would you like to do?\\n - Encode a file (e)\\n - Decode a file (d)\\n - Read the license (l)\\n"
+    }
+}
