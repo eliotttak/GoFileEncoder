@@ -1,0 +1,43 @@
+{
+    "CommonThings": {
+        "EchoedAttempt": "反映された試行: %s\\n",
+        "Hour": "時間",
+        "Hours": "時間",
+        "Minute": "分",
+        "Minutes": "分",
+        "NoGUI": "お使いのコンピューターでグラフィカルインターフェースが検出されませんでした。ファイルへの絶対パスを入力してください: ",
+        "Second": "秒",
+        "Seconds": "秒",
+        "Time": "%d %s、%02d %s、そして%02d.%06d %s",
+        "ToManyEchoedAttempts": "エコーされた試行が多すぎます"
+    },
+    "Decoding": {
+        "FileDecodedIn": "%s でファイルをデコードしました。\\n"
+    },
+    "Encoding": {
+        "CrackedIn": "%sでパスワードが解読されます\\n",
+        "FileEncodedIn": "ファイルは%sでエンコードされています。\\n",
+        "IsPwdOk": "あなたに合っていますか？",
+        "MoreThan290": "90年以上。",
+        "NoInitial": "n",
+        "PasswordValidated": "パスワードが検証されました。",
+        "WhichEncodingMethod": "どのエンコード方式を使用しますか？\\n - XOR暗号のみ (x)\\n - XORと回転暗号の両方（推奨）(xr)\\n",
+        "YesInitial": "y"
+    },
+    "General": {
+        "AllFiles": "すべてのファイル",
+        "EncodedBinFiles": "エンコードされたバイナリファイル",
+        "EnterPassword": "パスワードを入力してください: ",
+        "PressEnterToSaveFile": "ファイルを保存するには［Enter］を押してください...",
+        "PressEnterToSelectFile": "ファイルを選択するには [Enter] を押してください...",
+        "SaveFile": "ファイルを保存",
+        "SelectFile": "ファイルを選択",
+        "YouSelectedFile": "次のファイルを選択しました: %s。\\n\\n"
+    },
+    "Intro": {
+        "DecodeInitial": "d",
+        "EncodeInitial": "e",
+        "LicenseInitial": "l",
+        "WhatWouldYouLikeToDo": "何をしますか？\\n - ファイルをエンコードする (e)\\n - ファイルをデコードする (d)\\n - ライセンスを読む (l)\\n"
+    }
+}
