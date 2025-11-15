@@ -14,6 +14,18 @@ env:
   GOPRIVATE: '' # A list of modules are considered private and not requested from GOPROXY
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+          
+      - name: Create assets
+        run: go run github.com/go-bindata/go-bindata/go-bindata@latest -pkg "assets" -o "assets/bindata.go" "LICENSE"
   go-action-detection:
     runs-on: ubuntu-latest
     steps:
