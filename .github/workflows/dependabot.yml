@@ -35,4 +35,4 @@ jobs:
             # `main()` function) If not defined, this Action will collect all
             # dependencies used by all build targets for the module, which may
             # include Go dependencies used by tests and tooling.
-            go-build-target: pkg/main.go
+            go-build-target: pkg/GoFileEncoder.go
