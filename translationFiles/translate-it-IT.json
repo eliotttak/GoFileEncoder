@@ -19,7 +19,7 @@
     "Minutes": "minuti",
     "Second": "secondo",
     "Seconds": "secondi",
-    "Time": "%d %s, %02d %s e %02d,%06d %s"
+    "Time": "%d %s, %02d %s e %02d.%06d %s"
   },
   "Intro": {
     "WhatWouldYouLikeToDo": "Cosa ti piacerebbe fare?\n - Codifica di un file (c)\n - Decodifica di un file (d)\n - Leggi la licenza (l)\n",
@@ -32,7 +32,7 @@
     "NoInitial": "n",
     "IsPwdOk": "Siete soddisfatti di questo?",
     "CrackedIn": "La password verrebbe decifrata in %s\n",
-		"MoreThan290": "più di 90 anni.",
+    "MoreThan290": "più di 90 anni.",
     "PasswordValidated": "La password è stata convalidata.",
     "FileEncodedIn": "File codificato in %s.\n",
     "WhichEncodingMethod": "Quale metodo di crittografia si desidera utilizzare?\n - Solo crittografia XOR (x)\n - Crittografia XOR e rotativa (consigliata) (xr)\n"

@@ -19,7 +19,7 @@
     "Minutes": "minutes",
     "Second": "seconde",
     "Seconds": "secondes",
-    "Time": "%d %s, %02d %s et %02d,%06d %s"
+    "Time": "%d %s, %02d %s et %02d.%06d %s"
   },
   "Intro": {
     "WhatWouldYouLikeToDo": "Que souhaitez-vous faire ?\n - Encoder un fichier (e)\n - Décoder un fichier (d)\n - Lire la license (l)\n",
@@ -32,7 +32,7 @@
     "NoInitial": "n",
     "IsPwdOk": "Cela vous convient-il ?",
     "CrackedIn": "Le password pourrait être trouvé en %s\n",
-		"MoreThan290": "plus de 290 ans.",
+    "MoreThan290": "plus de 290 ans.",
     "PasswordValidated": "Le mot de passe a été validé.",
     "FileEncodedIn": "Fichier encodé en %s.\n",
     "WhichEncodingMethod": "Quelle méthode d'encryption souhaitez-vous utiliser ?\n - Seulement l'encryption XOR (x)\n - À la fois l'encryption XOR et l'encryption par rotation (recommandé) (xr)\n"
