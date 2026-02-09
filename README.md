@@ -6,6 +6,8 @@
 
 ## Introduction
 
+[![SOFTPEDIA REVIEW - 100% FREE - CERTIFIED NO SPYWARE / ADWARE / VIRUSES](https://www.softpedia.com/_img/softpedia_100_free.png)](https://www.softpedia.com/get/Security/Encrypting/GoFileEncoder.shtml)
+
 GoFileEncoder is a little file encoder that uses the [XOR encryption](https://en.wikipedia.org/wiki/XOR_cipher). It is coded in Golang, and is compiled for several OSs (Windows&reg;, Linux&reg;, and soon macOS&reg;).
 
 I am not a pro in Go, so if you find a bug, or simply want to make a suggestion, I am totally open to [issues](https://github.com/eliotttak/GoFileEncoder/issues), [pull requests_](https://github.com/eliotttak/GoFileEncoder/pulls) and to the [discussion](https://github.com/eliotttak/GoFileEncoder/discussions).
