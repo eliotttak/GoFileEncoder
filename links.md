@@ -5,4 +5,4 @@ This file contains links about GoFileEncoder.
  - <https://sourceforge.net/projects/gofileencoder/>
  - <https://alternativeto.net/software/gofileencoder/about/>
  - <https://www.onworks.net/software/windows/app-gofileencoder>
- - <https://descargatic.com/gofileencoder/><sup>🇪🇸</sup>
+ - <https://descargatic.com/gofileencoder/> 🇪🇸
