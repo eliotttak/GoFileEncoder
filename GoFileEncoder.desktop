@@ -1,0 +1,22 @@
+[Desktop Entry]
+Version=1.1
+Type=Application
+Name=GoFileEncoder
+GenericName[de]=Dateiverschlüsseler
+GenericName[es]=Cifrador de archivos
+GenericName[fr]=Chiffreur de fichiers
+GenericName[it]=Crittografo di file
+GenericName[pt]=Encriptador de ficheiros
+GenericName=File encrypter
+Comment[de]=Ein einfacher XOR-Dateiverschlüsseler.
+Comment[es]=Un sencillo cifrador de archivos XOR.
+Comment[fr]=Un simple chiffreur de fichiers XOR.
+Comment[it]=Un semplice programma di crittografia dei file XOR.
+Comment[pt]=Um simples encriptador de ficheiros XOR.
+Comment=A simple XOR file encrypter.
+Icon=/home/vachon/.local/share/GoFileEncoder/icon_scalable.svg
+TryExec=/home/vachon/.local/bin/GoFileEncoder
+Exec=/home/vachon/.local/bin/GoFileEncoder
+Terminal=true
+Keywords=encryption;xor;golang;opensource;
+
